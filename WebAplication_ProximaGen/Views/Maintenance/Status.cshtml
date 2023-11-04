@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Status";
+}
+
+@using WebAplication_ProximaGen.Logica
+
+@model WebAplication_ProximaGen.Models.Status
+
+
+
+<section class="pc-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Registros</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Registros</a></li>
+                            <li class="breadcrumb-item">Estados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Registrar Estado</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-5">Informacion Estado</h5>
+                        <hr>
+                        @using (Html.BeginForm("CreateStatus", "Maintenance", FormMethod.Post))
+                        {
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.LabelFor(model => model.descripcionEstado, "Descripción Estado", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.descripcionEstado, new { @class = "form-control", placeholder = "Estado" })
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Estado</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Reporte calificaciones por curso</h5>
+                    <span class="d-block m-t-5">Este <code>reporte</code> busca las calificaciones asignados al curso consultado</span>
+                </div>
+                <div class="card-body table-border-style">
+                    <br>
+                    <div class="text-left">
+                        <button class="btn btn-success btn-sm">
+                            <i class="fas fa-file-excel"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-image"></i>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <br>
+                        <label style="padding: 4px;" for="diasSemana">Selecciona el curso</label>
+                        <select id="diasSemana" class="form-control">
+                            <option value="SI-47">SI-47 / Admin de Sistemas</option>
+                            <option value="SI-27">SI-27	/ Programacion II</option>
+                            <option value="SI-46">SI-46	/ Admin de Proyectos</option>
+                        </select>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table id="tableEstado" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["Estados"] != null)
+                                {
+                                    foreach (var estado in TempData["Estados"] as List<WebAplication_ProximaGen.Models.Status>)
+                                    {
+                                        <tr>
+                                            <td>@estado.idEstado</td>
+                                            <td>@estado.descripcionEstado</td>
+                                            <td>
+                                                <a href="#" class="edit-icon" data-id="@estado.idEstado" onclick="AbrirModal('@estado.idEstado', '@estado.descripcionEstado');"><i class="fas fa-pen"></i></a>
+                                                <a href="#" class="delete-icon" data-id="@estado.idEstado" onclick="EliminarDato(@estado.idEstado);"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <!-- Agrega los botones de exportación aquí -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para editar datos -->
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Editar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("UpdateStatus", "Maintenance", FormMethod.Post))
+            {
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idEstado)
+                            @Html.TextBoxFor(model => model.idEstado, new { @class = "form-control", @readonly = "readonly", @id = "idEstado" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.descripcionEstado)
+                            @Html.TextBoxFor(model => model.descripcionEstado, new { @class = "form-control", @id = "descripcionEstadoInput" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function AbrirModal(idEstado, descripcionEstado) {
+        const idEstadoInput = document.getElementById("idEstado");
+        const descripcionEstadoInput = document.getElementById("descripcionEstadoInput");
+
+        idEstadoInput.value = idEstado;
+        descripcionEstadoInput.value = descripcionEstado;
+
+        const editarModal = new bootstrap.Modal(document.getElementById("editarModal"));
+        editarModal.show();
+    }
+
+
+
+
+    function EliminarDato(idEstado) {
+        EliminarDatosAjax(idEstado);
+    }
+
+</script>
+
+@if (TempData["response"] != null)
+{
+    if (TempData["response"] == null)
+    {
+        <script>
+            CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
+        </script>
+    }
+
+    if (TempData["response"].ToString().Contains(Constantes.responses[1]))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creacion Exitosa', 'success', decodedResponse);
+        </script>
+    }
+
+    if (TempData["response"].ToString().Contains(Constantes.responses[2]))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creacion Denegada', 'error', decodedResponse);
+        </script>
+    }
+}

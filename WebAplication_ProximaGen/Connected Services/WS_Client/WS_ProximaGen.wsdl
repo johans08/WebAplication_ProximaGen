@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AgregarEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionEstado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarEstadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionEstado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarEstadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarEstadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerEstados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="final" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerEstadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeerEstadosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AgregarEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarEstado" />
+  </wsdl:message>
+  <wsdl:message name="AgregarEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarEstadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarEstado" />
+  </wsdl:message>
+  <wsdl:message name="ModificarEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarEstadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarEstado" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarEstadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeerEstadosSoapIn">
+    <wsdl:part name="parameters" element="tns:LeerEstados" />
+  </wsdl:message>
+  <wsdl:message name="LeerEstadosSoapOut">
+    <wsdl:part name="parameters" element="tns:LeerEstadosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WS_ProximaGenSoap">
+    <wsdl:operation name="AgregarEstado">
+      <wsdl:input message="tns:AgregarEstadoSoapIn" />
+      <wsdl:output message="tns:AgregarEstadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEstado">
+      <wsdl:input message="tns:ModificarEstadoSoapIn" />
+      <wsdl:output message="tns:ModificarEstadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEstado">
+      <wsdl:input message="tns:EliminarEstadoSoapIn" />
+      <wsdl:output message="tns:EliminarEstadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeerEstados">
+      <wsdl:input message="tns:LeerEstadosSoapIn" />
+      <wsdl:output message="tns:LeerEstadosSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS_ProximaGenSoap" type="tns:WS_ProximaGenSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarEstado">
+      <soap:operation soapAction="http://tempuri.org/AgregarEstado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEstado">
+      <soap:operation soapAction="http://tempuri.org/ModificarEstado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEstado">
+      <soap:operation soapAction="http://tempuri.org/EliminarEstado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerEstados">
+      <soap:operation soapAction="http://tempuri.org/LeerEstados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_ProximaGenSoap12" type="tns:WS_ProximaGenSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarEstado">
+      <soap12:operation soapAction="http://tempuri.org/AgregarEstado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEstado">
+      <soap12:operation soapAction="http://tempuri.org/ModificarEstado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEstado">
+      <soap12:operation soapAction="http://tempuri.org/EliminarEstado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerEstados">
+      <soap12:operation soapAction="http://tempuri.org/LeerEstados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS_ProximaGen">
+    <wsdl:port name="WS_ProximaGenSoap" binding="tns:WS_ProximaGenSoap">
+      <soap:address location="http://localhost:57616/WS_ProximaGen.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_ProximaGenSoap12" binding="tns:WS_ProximaGenSoap12">
+      <soap12:address location="http://localhost:57616/WS_ProximaGen.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
