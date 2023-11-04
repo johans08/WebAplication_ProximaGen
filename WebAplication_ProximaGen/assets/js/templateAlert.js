@@ -6,7 +6,7 @@
     });
 }
 
-function EliminarDatosAjax(idEstado) {
+function EliminarDatosAjax(idEstado, controller, action, mensajeSucces, mensajeError) {
     Swal.fire({
         title: '¿Estás seguro?',
         text: 'No podrás revertir esta acción',
@@ -17,27 +17,27 @@ function EliminarDatosAjax(idEstado) {
     }).then((result) => {
         if (result.isConfirmed) {
             // Si el usuario confirma, llama a la función para eliminar el estado
-            EliminarEstado(idEstado);
+            EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeError);
         }
     });
 }
 
 
-function EliminarEstado(idEstado) {
+function EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeError) {
     $.ajax({
         type: 'POST',
-        url: '../../Maintenance/DeleteStatus', // Asegúrate de que la URL sea correcta
+        url: '../../' + controller + '/' + action, // Asegúrate de que la URL sea correcta  (Controller y Action)
         data: { idEstado: idEstado },
         success: function (data) {
             if (data.success) {
                 // Éxito, realizar alguna acción como recargar la tabla
                 // Puedes mostrar un mensaje de éxito si lo deseas
-                Swal.fire('Eliminado', 'El estado ha sido eliminado con éxito', 'success');
+                Swal.fire(mensajeSucces, 'success');
             }
         },
         error: function () {
             // Manejar errores de la solicitud AJAX
-            Swal.fire('Error', 'Hubo un problema al eliminar el estado', 'error');
+            Swal.fire('Error', mensajeError, 'error');
         }
     });
 }

@@ -174,7 +174,13 @@
 
 
     function EliminarDato(idEstado) {
-        EliminarDatosAjax(idEstado);
+
+        var controller = "Maintenance";
+        var action = "DeleteStatus";
+        var successMessage = "Se elimino el estado con exito";
+        var errorMessage = "No se ha eliminado, hubo un error de comunicacion";
+
+        EliminarDatosAjax(idEstado, controller, action, successMessage, errorMessage);
     }
 
 </script>

@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAplication_ProximaGen.WS_Client;
 
 namespace WebAplication_ProximaGen.Controllers
 {
     public class LoginController : Controller
     {
+
+        WS_ProximaGenSoapClient wsClient = new WS_ProximaGenSoapClient();
+
+
         // GET: Login
         public ActionResult Login()
         {
