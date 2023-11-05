@@ -46,24 +46,33 @@ namespace WebAplication_ProximaGen.Controllers
 
         public List<Status> LeerEstados(int inicio, int final)
         {
-            DataSet dsEstado = new DataSet();
-            dsEstado = wsClient.LeerEstados(inicio, final);
-
-            // Convertir los datos a una lista de objetos Status
-            var estados = new List<Status>();
-            foreach (DataRow dr in dsEstado.Tables[0].Rows)
+            try
             {
-                var estado = new Status
-                {
-                    idEstado = int.Parse(dr["idEstado"].ToString()),
-                    descripcionEstado = dr["descripcionEstado"].ToString()
-                };
-                estados.Add(estado);
-            }
+                DataSet dsEstado = new DataSet();
+                dsEstado = wsClient.LeerEstados(inicio, final);
 
-            // Puedes almacenar la lista de estados en TempData para que esté disponible en la vista
+                // Convertir los datos a una lista de objetos Status
+                var estados = new List<Status>();
+                foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                {
+                    var estado = new Status
+                    {
+                        idEstado = int.Parse(dr["idEstado"].ToString()),
+                        descripcionEstado = dr["descripcionEstado"].ToString()
+                    };
+                    estados.Add(estado);
+                }
+
+                // Puedes almacenar la lista de estados en TempData para que esté disponible en la vista
+
+                return estados;
+            }
+            catch (Exception) 
+            {
+
+                return null;
+            }
             
-            return estados;
         }
 
 
