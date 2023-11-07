@@ -75,10 +75,304 @@ namespace WebAplication_ProximaGen.Controllers
             
         }
 
+        public ActionResult Permissions()
+        {
+            try
+            {
+                var permisos = LeerPermisos(0, 100);
+                TempData["Permisos"] = permisos;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<Permissions> LeerPermisos(int inicio, int final)
+        {
+            try
+            {
+                DataSet dsPermiso = new DataSet();
+                dsPermiso = wsClient.Leer_Permisos(inicio, final);
+
+                // Convertir los datos a una lista de objetos Permissions
+                var permisos = new List<Permissions>();
+                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                {
+                    var permiso = new Permissions
+                    {
+                        idPermiso = int.Parse(dr["idPermiso"].ToString()),
+                        permiso = dr["permiso"].ToString()
+                    };
+                    permisos.Add(permiso);
+                }
+
+                // Puedes almacenar la lista de permisos en TempData para que esté disponible en la vista
+
+                return permisos;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult Roles()
+        {
+            try
+            {
+                var roles = LeerRoles(0, 100);
+                TempData["Roles"] = roles;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<Roles> LeerRoles(int inicio, int final)
+        {
+            try
+            {
+                DataSet dsRol = new DataSet();
+                dsRol = wsClient.LeerRoles(inicio, final);
+
+                // Convertir los datos a una lista de objetos Roles
+                var roles = new List<Roles>();
+                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                {
+                    var rol = new Roles
+                    {
+                        idRol = int.Parse(dr["idRol"].ToString()),
+                        descripcionRol = dr["descripcionRol"].ToString()
+                    };
+                    roles.Add(rol);
+                }
+
+                // Puedes almacenar la lista de roles en TempData para que esté disponible en la vista
+
+                return roles;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult Generos()
+        {
+            try
+            {
+                var generos = LeerGeneros(0, 100);
+                TempData["Generos"] = generos;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<Generos> LeerGeneros(int inicio, int final)
+        {
+            try
+            {
+                DataSet dsGenero = new DataSet();
+                dsGenero = wsClient.LeerGenero(inicio, final);
+
+                // Convertir los datos a una lista de objetos Genero
+                var generos = new List<Generos>();
+                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                {
+                    var genero = new Generos
+                    {
+                        idGenero = int.Parse(dr["idGenero"].ToString()),
+                        genero = dr["genero"].ToString()
+                    };
+                    generos.Add(genero);
+                }
+
+                // Puedes almacenar la lista de generos en TempData para que esté disponible en la vista
+
+                return generos;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult Contactos()
+        {
+            try
+            {
+                var contactos = LeerContactos(0); //inicio,fin REVISAR SI DEBE QUEDAR CON PARAMETRO**
+                TempData["Contactos"] = contactos;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<Contactos> LeerContactos(int inicio)
+        {
+            try
+            {
+                DataSet dsContactos = new DataSet();
+                dsContactos = wsClient.Leer_Contactos(inicio);
+
+                // Convertir los datos a una lista de objetos Contactos
+                var contactos = new List<Contactos>();
+                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                {
+                    var contacto = new Contactos
+                    {
+                        idContacto = int.Parse(dr["idContacto"].ToString()),
+                        descripcionContacto = dr["descripcionContacto"].ToString(),
+                        TipoContactos_idTipoContacto = int.Parse(dr["TipoContactos_idTipoContacto"].ToString()),
+                        Personas_idPersona = int.Parse(dr["Personas_idPersona"].ToString())
+                    };
+                    contactos.Add(contacto);
+                }
+
+                // Puedes almacenar la lista de contactos en TempData para que esté disponible en la vista
+
+                return contactos;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult TipoContactos()
+        {
+            try
+            {
+                var tipocontactos = LeerTipoContacto(0, 100);
+                TempData["TipoContactos"] = tipocontactos;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<TipoContactos> LeerTipoContacto(int inicio, int final)
+        {
+            try
+            {
+                DataSet dsTipoContactos = new DataSet();
+                dsTipoContactos = wsClient.LeerTipoContactos(inicio, final);
+
+                // Convertir los datos a una lista de objetos TipoContacto
+                var tipocontactos = new List<TipoContactos>();
+                foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                {
+                    var tipocontacto = new TipoContactos
+                    {
+                        idTipoContacto = int.Parse(dr["idTipoContacto"].ToString()),
+                        descripcionTipoContacto = dr["descripcionTipoContacto"].ToString()
+                    };
+                    tipocontactos.Add(tipocontacto);
+                }
+
+                // Puedes almacenar la lista de tipocontacto en TempData para que esté disponible en la vista
+
+                return tipocontactos;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult Tarjetas()
+        {
+            try
+            {
+                var tarjetas = LeerTarjetas(0);//0,100
+                TempData["Tarjetas"] = tarjetas;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
+        public List<Tarjetas> LeerTarjetas(int inicio)
+        {
+
+            try
+            {
+                DataSet dsTarjetas = new DataSet();
+                dsTarjetas = wsClient.Leer_Tarjetas(inicio);
+
+                // Convertir los datos a una lista de objetos Tarjetas
+                var tarjetas = new List<Tarjetas>();
+                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                {
+                    var tarjeta = new Tarjetas
+                    {
+                        idTarjeta = int.Parse(dr["idTarjeta"].ToString()),
+                        numeroTarjeta = dr["numeroTarjeta"].ToString(),
+                        expiracionMes = int.Parse(dr["expiracionMes"].ToString()),
+                        expiracionAnno = int.Parse(dr["expiracionAnno"].ToString()),
+                        cvv = dr["cvv"].ToString(),
+                        Personas_idPersona = int.Parse(dr["Personas_idPersona"].ToString()),
+                        Estados_idEstado = int.Parse(dr["Estados_idEstado"].ToString())
+                    };
+                    tarjetas.Add(tarjeta);
+                }
+
+                // Puedes almacenar la lista de tarjetas en TempData para que esté disponible en la vista
+
+                return tarjetas;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
 
 
-
-        // POST: Maintenance/Create
+        // POST: Maintenance/CreateStatus
         [HttpPost]
         public ActionResult CreateStatus(Status status)
         {
@@ -163,5 +457,515 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
+        // POST: Maintenance/CreatePermissions
+        [HttpPost]
+        public ActionResult CreatePermissions(Permissions permissions)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPermiso = new DataSet();
+
+                dsPermiso = wsClient.AgregarPermisos(permissions.permiso);
+
+                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Permissions");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePermissions(Permissions permissions)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPermiso = new DataSet();
+
+                dsPermiso = wsClient.ModificarPermisos(permissions.idPermiso, permissions.permiso);
+
+                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Permissions");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeletePermissions(Permissions permissions)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPermiso = new DataSet();
+
+                dsPermiso = wsClient.EliminarPermisos(permissions.idPermiso);
+
+                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Permissions");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Maintenance/CreateRoles
+        [HttpPost]
+        public ActionResult CreateRoles(Roles roles)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsRol = new DataSet();
+
+                dsRol = wsClient.AgregarRol(roles.descripcionRol);
+
+                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Roles");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRoles(Roles roles)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsRol = new DataSet();
+
+                dsRol = wsClient.ModificarRol(roles.idRol, roles.descripcionRol);
+
+                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Roles");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRoles(Roles roles)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsRol = new DataSet();
+
+                dsRol = wsClient.EliminarRol(roles.idRol);
+
+                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Roles");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        
+        // POST: Maintenance/CreateGenero
+        [HttpPost]
+        public ActionResult CreateGenero(Generos generos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsGenero = new DataSet();
+
+                dsGenero = wsClient.AgregarGenero(generos.genero);
+
+                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Generos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateGenero(Generos generos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsGenero = new DataSet();
+
+                dsGenero = wsClient.ModificarGenero(generos.idGenero, generos.genero);
+
+                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Generos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteGenero(Generos generos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsGenero = new DataSet();
+
+                dsGenero = wsClient.EliminarGenero(generos.idGenero);
+
+                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Generos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Maintenance/CreateContactos
+        [HttpPost]
+        public ActionResult CreateContactos(Contactos contactos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsContactos = new DataSet();
+
+                dsContactos = wsClient.AgregarContactos(contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
+
+                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Contactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateContactos(Contactos contactos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsContactos = new DataSet();
+
+                dsContactos = wsClient.ModificarContactos(contactos.idContacto, contactos.descripcionContacto,contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
+
+                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Contactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteContactos(Contactos contactos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsContactos = new DataSet();
+
+                dsContactos = wsClient.EliminarContactos(contactos.idContacto);
+
+                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Contactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Maintenance/CreateTipoContactos
+        [HttpPost]
+        public ActionResult CreateTipoContactos(TipoContactos tipocontactos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTipoContactos = new DataSet();
+
+                dsTipoContactos = wsClient.AgregarTipoContacto(tipocontactos.descripcionTipoContacto);
+
+                foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("TipoContactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTipoContactos(TipoContactos tipocontacto)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTipoContacto = new DataSet();
+
+                dsTipoContacto = wsClient.ModificarTipoContacto(tipocontacto.idTipoContacto, tipocontacto.descripcionTipoContacto);
+
+                foreach (DataRow dr in dsTipoContacto.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("TipoContactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTipoContactos(TipoContactos tipocontactos)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTipoContactos = new DataSet();
+
+                dsTipoContactos = wsClient.EliminarContactos(tipocontactos.idTipoContacto);
+
+                foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("TipoContactos");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Maintenance/CreateTarjetas
+        [HttpPost]
+        public ActionResult CreateTarjetas(Tarjetas tarjetas)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTarjetas = new DataSet();
+
+                dsTarjetas = wsClient.AgregarTarjetas(tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
+
+                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Tarjetas");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTarjetas(Tarjetas tarjetas)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTarjetas = new DataSet();
+
+                dsTarjetas = wsClient.ModificarTarjetas(tarjetas.idTarjeta,tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
+
+                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Tarjetas");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTarjetas(Tarjetas tarjetas)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsTarjetas = new DataSet();
+
+                dsTarjetas = wsClient.EliminarTarjetas(tarjetas.idTarjeta);
+
+                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Tarjetas");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

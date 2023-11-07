@@ -139,8 +139,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logica\Constantes.cs" />
+    <Compile Include="Models\Contactos.cs" />
+    <Compile Include="Models\Generos.cs" />
+    <Compile Include="Models\Permissions.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Tarjetas.cs" />
+    <Compile Include="Models\TipoContactos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\Maintenance\Generos.cshtml" />
+    <Content Include="Views\Maintenance\TipoContactos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\landing.css" />
@@ -271,6 +279,8 @@
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Views\Maintenance\Status.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Maintenance\Roles.cshtml" />
+    <Content Include="Views\Maintenance\Permissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

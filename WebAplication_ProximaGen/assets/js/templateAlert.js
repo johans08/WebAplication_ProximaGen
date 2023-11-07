@@ -6,7 +6,8 @@
     });
 }
 
-function EliminarDatosAjax(idEstado, controller, action, mensajeSucces, mensajeError) {
+function EliminarDatosAjax(id, controller, action, mensajeSucces, mensajeError, dataString) {
+   
     Swal.fire({
         title: '¿Estás seguro?',
         text: 'No podrás revertir esta acción',
@@ -17,17 +18,20 @@ function EliminarDatosAjax(idEstado, controller, action, mensajeSucces, mensajeE
     }).then((result) => {
         if (result.isConfirmed) {
             // Si el usuario confirma, llama a la función para eliminar el estado
-            EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeError);
+            EliminarEstado(id, controller, action, mensajeSucces, mensajeError, dataString);
         }
     });
 }
 
 
-function EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeError) {
+function EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeError, dataString) {
+    var data = {};
+    data[dataString] = idEstado;
+
     $.ajax({
         type: 'POST',
-        url: '../../' + controller + '/' + action, // Asegúrate de que la URL sea correcta  (Controller y Action)
-        data: { idEstado: idEstado },
+        url: '../../' + controller + '/' + action, // Asegúrate de que la URL sea correcta (Controller y Action)
+        data: data,
         success: function (data) {
             if (data.success) {
                 // Éxito, realizar alguna acción como recargar la tabla
