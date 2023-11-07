@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="DqgewJGH3RNtPgYrqAw6Aui5HUcQC2IA24eb1kIC/xI=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="FIZ1LpOuKDletMiInwFOvMFO7UcTCOx4VrByISf8Y/o=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="WS_ProximaGenSoap">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WS_ProximaGenSoap" contract="WS_Client.WS_ProximaGenSoap" bindingType="basicHttpBinding" address="http://localhost:57616/WS_ProximaGen.asmx" bindingConfiguration="WS_ProximaGenSoap">
+    <endpoint name="WS_ProximaGenSoap" contract="WS_Client.WS_ProximaGenSoap" bindingType="basicHttpBinding" address="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx" bindingConfiguration="WS_ProximaGenSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:57616/WS_ProximaGen.asmx</serializedValue>
+          <serializedValue>http://www.wsproximagen.somee.com/WS_ProximaGen.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

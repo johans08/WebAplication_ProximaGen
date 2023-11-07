@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="de982b08-4361-40a8-9b7d-ef3b080f9567" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="cff00b1d-74f2-4deb-83be-8ecbbb376f29" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:57616/WS_ProximaGen.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WS_ProximaGen.disco" MetadataType="Disco" ID="9b30c299-7f86-49bf-90f4-cbcf6f7b56ea" SourceId="1" SourceUrl="http://localhost:57616/WS_ProximaGen.asmx?disco" />
-    <MetadataFile FileName="WS_ProximaGen.wsdl" MetadataType="Wsdl" ID="9b38e60a-3a2f-4202-84cc-7f51a30389bd" SourceId="1" SourceUrl="http://localhost:57616/WS_ProximaGen.asmx?wsdl" />
+    <MetadataFile FileName="WS_ProximaGen.wsdl" MetadataType="Wsdl" ID="18e14c7f-1acd-434d-bcf6-41cdc91c9104" SourceId="1" SourceUrl="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx?wsdl" />
+    <MetadataFile FileName="WS_ProximaGen.disco" MetadataType="Disco" ID="f8976559-2118-493d-b556-a15089c42df9" SourceId="1" SourceUrl="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="AgregarEstado">
@@ -88,6 +88,621 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AgregarTipoContacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionTipoContacto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarTipoContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarTipoContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarTipoContacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionTipoContacto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarTipoContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarTipoContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarTipoContacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarTipoContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarTipoContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerTipoContactos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="final" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerTipoContactosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeerTipoContactosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionRol" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionRol" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerRoles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="final" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeerRolesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarPermisoXRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPermiso" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarPermisoXRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarPermisoXRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPermisoXRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPermiso" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPermisoXRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarPermisoXRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPermisoXRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPermiso" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPermisoXRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarPermisoXRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerPermisosXRoles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerPermisosXRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeerPermisosXRolesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarGenero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="genero" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarGeneroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarGeneroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarGenero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idGenero" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="genero" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarGeneroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarGeneroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarGenero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idGenero" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarGeneroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarGeneroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerGenero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="final" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeerGeneroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LeerGeneroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarPermisos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="permiso" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarPermisosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarPermisosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPermisos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPermiso" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="permiso" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPermisosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarPermisosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPermisos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPermiso" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPermisosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarPermisosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_Permisos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="final" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_PermisosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Leer_PermisosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarContactos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionContacto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoPersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarContactosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarContactosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarContactos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idContacto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionContacto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoPersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarContactosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarContactosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarContactos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idContacto" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarContactosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarContactosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_Contactos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_ContactosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Leer_ContactosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarTarjetas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="numeroTarjeta" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="expiracionMes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="expiracionAnno" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cvv" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Personas_idPersona" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Estados_idEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarTarjetasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarTarjetasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarTarjetas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idTarjeta" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroTarjeta" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="expiracionMes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="expiracionAnno" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cvv" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Personas_idPersona" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Estados_idEstado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarTarjetasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarTarjetasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarTarjetas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idTarjeta" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarTarjetasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarTarjetasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_Tarjetas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Leer_TarjetasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Leer_TarjetasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AgregarEstadoSoapIn">
@@ -114,6 +729,174 @@
   <wsdl:message name="LeerEstadosSoapOut">
     <wsdl:part name="parameters" element="tns:LeerEstadosResponse" />
   </wsdl:message>
+  <wsdl:message name="AgregarTipoContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarTipoContacto" />
+  </wsdl:message>
+  <wsdl:message name="AgregarTipoContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarTipoContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarTipoContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarTipoContacto" />
+  </wsdl:message>
+  <wsdl:message name="ModificarTipoContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarTipoContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarTipoContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarTipoContacto" />
+  </wsdl:message>
+  <wsdl:message name="EliminarTipoContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarTipoContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeerTipoContactosSoapIn">
+    <wsdl:part name="parameters" element="tns:LeerTipoContactos" />
+  </wsdl:message>
+  <wsdl:message name="LeerTipoContactosSoapOut">
+    <wsdl:part name="parameters" element="tns:LeerTipoContactosResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarRolSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarRol" />
+  </wsdl:message>
+  <wsdl:message name="AgregarRolSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarRolSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarRol" />
+  </wsdl:message>
+  <wsdl:message name="ModificarRolSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarRolSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarRol" />
+  </wsdl:message>
+  <wsdl:message name="EliminarRolSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeerRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:LeerRoles" />
+  </wsdl:message>
+  <wsdl:message name="LeerRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:LeerRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPermisoXRolSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarPermisoXRol" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPermisoXRolSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarPermisoXRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPermisoXRolSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPermisoXRol" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPermisoXRolSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPermisoXRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPermisoXRolSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarPermisoXRol" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPermisoXRolSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarPermisoXRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeerPermisosXRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:LeerPermisosXRoles" />
+  </wsdl:message>
+  <wsdl:message name="LeerPermisosXRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:LeerPermisosXRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarGeneroSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarGenero" />
+  </wsdl:message>
+  <wsdl:message name="AgregarGeneroSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarGeneroResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarGeneroSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarGenero" />
+  </wsdl:message>
+  <wsdl:message name="ModificarGeneroSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarGeneroResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarGeneroSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarGenero" />
+  </wsdl:message>
+  <wsdl:message name="EliminarGeneroSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarGeneroResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeerGeneroSoapIn">
+    <wsdl:part name="parameters" element="tns:LeerGenero" />
+  </wsdl:message>
+  <wsdl:message name="LeerGeneroSoapOut">
+    <wsdl:part name="parameters" element="tns:LeerGeneroResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPermisosSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarPermisos" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPermisosSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarPermisosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPermisosSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPermisos" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPermisosSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPermisosResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPermisosSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarPermisos" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPermisosSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarPermisosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Leer_PermisosSoapIn">
+    <wsdl:part name="parameters" element="tns:Leer_Permisos" />
+  </wsdl:message>
+  <wsdl:message name="Leer_PermisosSoapOut">
+    <wsdl:part name="parameters" element="tns:Leer_PermisosResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarContactosSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarContactos" />
+  </wsdl:message>
+  <wsdl:message name="AgregarContactosSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarContactosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarContactosSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarContactos" />
+  </wsdl:message>
+  <wsdl:message name="ModificarContactosSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarContactosResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarContactosSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarContactos" />
+  </wsdl:message>
+  <wsdl:message name="EliminarContactosSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarContactosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Leer_ContactosSoapIn">
+    <wsdl:part name="parameters" element="tns:Leer_Contactos" />
+  </wsdl:message>
+  <wsdl:message name="Leer_ContactosSoapOut">
+    <wsdl:part name="parameters" element="tns:Leer_ContactosResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarTarjetasSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarTarjetas" />
+  </wsdl:message>
+  <wsdl:message name="AgregarTarjetasSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarTarjetasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarTarjetasSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarTarjetas" />
+  </wsdl:message>
+  <wsdl:message name="ModificarTarjetasSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarTarjetasResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarTarjetasSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarTarjetas" />
+  </wsdl:message>
+  <wsdl:message name="EliminarTarjetasSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarTarjetasResponse" />
+  </wsdl:message>
+  <wsdl:message name="Leer_TarjetasSoapIn">
+    <wsdl:part name="parameters" element="tns:Leer_Tarjetas" />
+  </wsdl:message>
+  <wsdl:message name="Leer_TarjetasSoapOut">
+    <wsdl:part name="parameters" element="tns:Leer_TarjetasResponse" />
+  </wsdl:message>
   <wsdl:portType name="WS_ProximaGenSoap">
     <wsdl:operation name="AgregarEstado">
       <wsdl:input message="tns:AgregarEstadoSoapIn" />
@@ -130,6 +913,118 @@
     <wsdl:operation name="LeerEstados">
       <wsdl:input message="tns:LeerEstadosSoapIn" />
       <wsdl:output message="tns:LeerEstadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTipoContacto">
+      <wsdl:input message="tns:AgregarTipoContactoSoapIn" />
+      <wsdl:output message="tns:AgregarTipoContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTipoContacto">
+      <wsdl:input message="tns:ModificarTipoContactoSoapIn" />
+      <wsdl:output message="tns:ModificarTipoContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTipoContacto">
+      <wsdl:input message="tns:EliminarTipoContactoSoapIn" />
+      <wsdl:output message="tns:EliminarTipoContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeerTipoContactos">
+      <wsdl:input message="tns:LeerTipoContactosSoapIn" />
+      <wsdl:output message="tns:LeerTipoContactosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarRol">
+      <wsdl:input message="tns:AgregarRolSoapIn" />
+      <wsdl:output message="tns:AgregarRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarRol">
+      <wsdl:input message="tns:ModificarRolSoapIn" />
+      <wsdl:output message="tns:ModificarRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRol">
+      <wsdl:input message="tns:EliminarRolSoapIn" />
+      <wsdl:output message="tns:EliminarRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeerRoles">
+      <wsdl:input message="tns:LeerRolesSoapIn" />
+      <wsdl:output message="tns:LeerRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisoXRol">
+      <wsdl:input message="tns:AgregarPermisoXRolSoapIn" />
+      <wsdl:output message="tns:AgregarPermisoXRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisoXRol">
+      <wsdl:input message="tns:ModificarPermisoXRolSoapIn" />
+      <wsdl:output message="tns:ModificarPermisoXRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisoXRol">
+      <wsdl:input message="tns:EliminarPermisoXRolSoapIn" />
+      <wsdl:output message="tns:EliminarPermisoXRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeerPermisosXRoles">
+      <wsdl:input message="tns:LeerPermisosXRolesSoapIn" />
+      <wsdl:output message="tns:LeerPermisosXRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarGenero">
+      <wsdl:input message="tns:AgregarGeneroSoapIn" />
+      <wsdl:output message="tns:AgregarGeneroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarGenero">
+      <wsdl:input message="tns:ModificarGeneroSoapIn" />
+      <wsdl:output message="tns:ModificarGeneroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarGenero">
+      <wsdl:input message="tns:EliminarGeneroSoapIn" />
+      <wsdl:output message="tns:EliminarGeneroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeerGenero">
+      <wsdl:input message="tns:LeerGeneroSoapIn" />
+      <wsdl:output message="tns:LeerGeneroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisos">
+      <wsdl:input message="tns:AgregarPermisosSoapIn" />
+      <wsdl:output message="tns:AgregarPermisosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisos">
+      <wsdl:input message="tns:ModificarPermisosSoapIn" />
+      <wsdl:output message="tns:ModificarPermisosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisos">
+      <wsdl:input message="tns:EliminarPermisosSoapIn" />
+      <wsdl:output message="tns:EliminarPermisosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Permisos">
+      <wsdl:input message="tns:Leer_PermisosSoapIn" />
+      <wsdl:output message="tns:Leer_PermisosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarContactos">
+      <wsdl:input message="tns:AgregarContactosSoapIn" />
+      <wsdl:output message="tns:AgregarContactosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarContactos">
+      <wsdl:input message="tns:ModificarContactosSoapIn" />
+      <wsdl:output message="tns:ModificarContactosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarContactos">
+      <wsdl:input message="tns:EliminarContactosSoapIn" />
+      <wsdl:output message="tns:EliminarContactosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Contactos">
+      <wsdl:input message="tns:Leer_ContactosSoapIn" />
+      <wsdl:output message="tns:Leer_ContactosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTarjetas">
+      <wsdl:input message="tns:AgregarTarjetasSoapIn" />
+      <wsdl:output message="tns:AgregarTarjetasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTarjetas">
+      <wsdl:input message="tns:ModificarTarjetasSoapIn" />
+      <wsdl:output message="tns:ModificarTarjetasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTarjetas">
+      <wsdl:input message="tns:EliminarTarjetasSoapIn" />
+      <wsdl:output message="tns:EliminarTarjetasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Tarjetas">
+      <wsdl:input message="tns:Leer_TarjetasSoapIn" />
+      <wsdl:output message="tns:Leer_TarjetasSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WS_ProximaGenSoap" type="tns:WS_ProximaGenSoap">
@@ -163,6 +1058,258 @@
     </wsdl:operation>
     <wsdl:operation name="LeerEstados">
       <soap:operation soapAction="http://tempuri.org/LeerEstados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTipoContacto">
+      <soap:operation soapAction="http://tempuri.org/AgregarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTipoContacto">
+      <soap:operation soapAction="http://tempuri.org/ModificarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTipoContacto">
+      <soap:operation soapAction="http://tempuri.org/EliminarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerTipoContactos">
+      <soap:operation soapAction="http://tempuri.org/LeerTipoContactos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarRol">
+      <soap:operation soapAction="http://tempuri.org/AgregarRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarRol">
+      <soap:operation soapAction="http://tempuri.org/ModificarRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRol">
+      <soap:operation soapAction="http://tempuri.org/EliminarRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerRoles">
+      <soap:operation soapAction="http://tempuri.org/LeerRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisoXRol">
+      <soap:operation soapAction="http://tempuri.org/AgregarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisoXRol">
+      <soap:operation soapAction="http://tempuri.org/ModificarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisoXRol">
+      <soap:operation soapAction="http://tempuri.org/EliminarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerPermisosXRoles">
+      <soap:operation soapAction="http://tempuri.org/LeerPermisosXRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarGenero">
+      <soap:operation soapAction="http://tempuri.org/AgregarGenero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarGenero">
+      <soap:operation soapAction="http://tempuri.org/ModificarGenero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarGenero">
+      <soap:operation soapAction="http://tempuri.org/EliminarGenero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerGenero">
+      <soap:operation soapAction="http://tempuri.org/LeerGenero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisos">
+      <soap:operation soapAction="http://tempuri.org/AgregarPermisos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisos">
+      <soap:operation soapAction="http://tempuri.org/ModificarPermisos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisos">
+      <soap:operation soapAction="http://tempuri.org/EliminarPermisos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Permisos">
+      <soap:operation soapAction="http://tempuri.org/Leer_Permisos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarContactos">
+      <soap:operation soapAction="http://tempuri.org/AgregarContactos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarContactos">
+      <soap:operation soapAction="http://tempuri.org/ModificarContactos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarContactos">
+      <soap:operation soapAction="http://tempuri.org/EliminarContactos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Contactos">
+      <soap:operation soapAction="http://tempuri.org/Leer_Contactos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTarjetas">
+      <soap:operation soapAction="http://tempuri.org/AgregarTarjetas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTarjetas">
+      <soap:operation soapAction="http://tempuri.org/ModificarTarjetas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTarjetas">
+      <soap:operation soapAction="http://tempuri.org/EliminarTarjetas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Tarjetas">
+      <soap:operation soapAction="http://tempuri.org/Leer_Tarjetas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -209,13 +1356,265 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AgregarTipoContacto">
+      <soap12:operation soapAction="http://tempuri.org/AgregarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTipoContacto">
+      <soap12:operation soapAction="http://tempuri.org/ModificarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTipoContacto">
+      <soap12:operation soapAction="http://tempuri.org/EliminarTipoContacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerTipoContactos">
+      <soap12:operation soapAction="http://tempuri.org/LeerTipoContactos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarRol">
+      <soap12:operation soapAction="http://tempuri.org/AgregarRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarRol">
+      <soap12:operation soapAction="http://tempuri.org/ModificarRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarRol">
+      <soap12:operation soapAction="http://tempuri.org/EliminarRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerRoles">
+      <soap12:operation soapAction="http://tempuri.org/LeerRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisoXRol">
+      <soap12:operation soapAction="http://tempuri.org/AgregarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisoXRol">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisoXRol">
+      <soap12:operation soapAction="http://tempuri.org/EliminarPermisoXRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerPermisosXRoles">
+      <soap12:operation soapAction="http://tempuri.org/LeerPermisosXRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarGenero">
+      <soap12:operation soapAction="http://tempuri.org/AgregarGenero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarGenero">
+      <soap12:operation soapAction="http://tempuri.org/ModificarGenero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarGenero">
+      <soap12:operation soapAction="http://tempuri.org/EliminarGenero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeerGenero">
+      <soap12:operation soapAction="http://tempuri.org/LeerGenero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPermisos">
+      <soap12:operation soapAction="http://tempuri.org/AgregarPermisos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPermisos">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPermisos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPermisos">
+      <soap12:operation soapAction="http://tempuri.org/EliminarPermisos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Permisos">
+      <soap12:operation soapAction="http://tempuri.org/Leer_Permisos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarContactos">
+      <soap12:operation soapAction="http://tempuri.org/AgregarContactos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarContactos">
+      <soap12:operation soapAction="http://tempuri.org/ModificarContactos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarContactos">
+      <soap12:operation soapAction="http://tempuri.org/EliminarContactos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Contactos">
+      <soap12:operation soapAction="http://tempuri.org/Leer_Contactos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTarjetas">
+      <soap12:operation soapAction="http://tempuri.org/AgregarTarjetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarTarjetas">
+      <soap12:operation soapAction="http://tempuri.org/ModificarTarjetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarTarjetas">
+      <soap12:operation soapAction="http://tempuri.org/EliminarTarjetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leer_Tarjetas">
+      <soap12:operation soapAction="http://tempuri.org/Leer_Tarjetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="WS_ProximaGen">
     <wsdl:port name="WS_ProximaGenSoap" binding="tns:WS_ProximaGenSoap">
-      <soap:address location="http://localhost:57616/WS_ProximaGen.asmx" />
+      <soap:address location="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx" />
     </wsdl:port>
     <wsdl:port name="WS_ProximaGenSoap12" binding="tns:WS_ProximaGenSoap12">
-      <soap12:address location="http://localhost:57616/WS_ProximaGen.asmx" />
+      <soap12:address location="http://www.wsproximagen.somee.com/WS_ProximaGen.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

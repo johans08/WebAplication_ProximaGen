@@ -43,6 +43,202 @@ namespace WebAplication_ProximaGen.WS_Client {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerEstados", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> LeerEstadosAsync(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarTipoContacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarTipoContacto(string descripcionTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarTipoContacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarTipoContactoAsync(string descripcionTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarTipoContacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarTipoContacto(int idTipoContacto, string descripcionTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarTipoContacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarTipoContactoAsync(int idTipoContacto, string descripcionTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarTipoContacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarTipoContacto(int idTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarTipoContacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarTipoContactoAsync(int idTipoContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerTipoContactos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet LeerTipoContactos(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerTipoContactos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> LeerTipoContactosAsync(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarRol(string descripcionRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarRolAsync(string descripcionRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarRol(int idRol, string descripcionRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarRolAsync(int idRol, string descripcionRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarRol(int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarRolAsync(int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerRoles", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet LeerRoles(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerRoles", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> LeerRolesAsync(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPermisoXRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarPermisoXRol(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPermisoXRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarPermisoXRolAsync(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPermisoXRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarPermisoXRol(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPermisoXRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarPermisoXRolAsync(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPermisoXRol", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarPermisoXRol(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPermisoXRol", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarPermisoXRolAsync(int idPermiso, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerPermisosXRoles", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet LeerPermisosXRoles(int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerPermisosXRoles", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> LeerPermisosXRolesAsync(int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarGenero", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarGenero(string genero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarGenero", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarGeneroAsync(string genero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarGenero", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarGenero(int idGenero, string genero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarGenero", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarGeneroAsync(int idGenero, string genero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarGenero", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarGenero(int idGenero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarGenero", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarGeneroAsync(int idGenero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerGenero", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet LeerGenero(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LeerGenero", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> LeerGeneroAsync(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPermisos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarPermisos(string permiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPermisos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarPermisosAsync(string permiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPermisos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarPermisos(int idPermiso, string permiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPermisos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarPermisosAsync(int idPermiso, string permiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPermisos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarPermisos(int idPermiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPermisos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarPermisosAsync(int idPermiso);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Permisos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Leer_Permisos(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Permisos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> Leer_PermisosAsync(int inicio, int final);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarContactos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarContactos(string descripcionContacto, int idTipoContacto, int idTipoPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarContactos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarContactosAsync(string descripcionContacto, int idTipoContacto, int idTipoPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarContactos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarContactos(int idContacto, string descripcionContacto, int idTipoContacto, int idTipoPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarContactos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarContactosAsync(int idContacto, string descripcionContacto, int idTipoContacto, int idTipoPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarContactos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarContactos(int idContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarContactos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarContactosAsync(int idContacto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Contactos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Leer_Contactos(int idPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Contactos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> Leer_ContactosAsync(int idPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarTarjetas", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarTarjetas(string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarTarjetas", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarTarjetasAsync(string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarTarjetas", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarTarjetas(int idTarjeta, string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarTarjetas", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarTarjetasAsync(int idTarjeta, string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarTarjetas", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarTarjetas(int idTarjeta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarTarjetas", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarTarjetasAsync(int idTarjeta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Tarjetas", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Leer_Tarjetas(int idPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Tarjetas", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> Leer_TarjetasAsync(int idPersona);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -102,6 +298,230 @@ namespace WebAplication_ProximaGen.WS_Client {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> LeerEstadosAsync(int inicio, int final) {
             return base.Channel.LeerEstadosAsync(inicio, final);
+        }
+        
+        public System.Data.DataSet AgregarTipoContacto(string descripcionTipoContacto) {
+            return base.Channel.AgregarTipoContacto(descripcionTipoContacto);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarTipoContactoAsync(string descripcionTipoContacto) {
+            return base.Channel.AgregarTipoContactoAsync(descripcionTipoContacto);
+        }
+        
+        public System.Data.DataSet ModificarTipoContacto(int idTipoContacto, string descripcionTipoContacto) {
+            return base.Channel.ModificarTipoContacto(idTipoContacto, descripcionTipoContacto);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarTipoContactoAsync(int idTipoContacto, string descripcionTipoContacto) {
+            return base.Channel.ModificarTipoContactoAsync(idTipoContacto, descripcionTipoContacto);
+        }
+        
+        public System.Data.DataSet EliminarTipoContacto(int idTipoContacto) {
+            return base.Channel.EliminarTipoContacto(idTipoContacto);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarTipoContactoAsync(int idTipoContacto) {
+            return base.Channel.EliminarTipoContactoAsync(idTipoContacto);
+        }
+        
+        public System.Data.DataSet LeerTipoContactos(int inicio, int final) {
+            return base.Channel.LeerTipoContactos(inicio, final);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> LeerTipoContactosAsync(int inicio, int final) {
+            return base.Channel.LeerTipoContactosAsync(inicio, final);
+        }
+        
+        public System.Data.DataSet AgregarRol(string descripcionRol) {
+            return base.Channel.AgregarRol(descripcionRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarRolAsync(string descripcionRol) {
+            return base.Channel.AgregarRolAsync(descripcionRol);
+        }
+        
+        public System.Data.DataSet ModificarRol(int idRol, string descripcionRol) {
+            return base.Channel.ModificarRol(idRol, descripcionRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarRolAsync(int idRol, string descripcionRol) {
+            return base.Channel.ModificarRolAsync(idRol, descripcionRol);
+        }
+        
+        public System.Data.DataSet EliminarRol(int idRol) {
+            return base.Channel.EliminarRol(idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarRolAsync(int idRol) {
+            return base.Channel.EliminarRolAsync(idRol);
+        }
+        
+        public System.Data.DataSet LeerRoles(int inicio, int final) {
+            return base.Channel.LeerRoles(inicio, final);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> LeerRolesAsync(int inicio, int final) {
+            return base.Channel.LeerRolesAsync(inicio, final);
+        }
+        
+        public System.Data.DataSet AgregarPermisoXRol(int idPermiso, int idRol) {
+            return base.Channel.AgregarPermisoXRol(idPermiso, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarPermisoXRolAsync(int idPermiso, int idRol) {
+            return base.Channel.AgregarPermisoXRolAsync(idPermiso, idRol);
+        }
+        
+        public System.Data.DataSet ModificarPermisoXRol(int idPermiso, int idRol) {
+            return base.Channel.ModificarPermisoXRol(idPermiso, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarPermisoXRolAsync(int idPermiso, int idRol) {
+            return base.Channel.ModificarPermisoXRolAsync(idPermiso, idRol);
+        }
+        
+        public System.Data.DataSet EliminarPermisoXRol(int idPermiso, int idRol) {
+            return base.Channel.EliminarPermisoXRol(idPermiso, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarPermisoXRolAsync(int idPermiso, int idRol) {
+            return base.Channel.EliminarPermisoXRolAsync(idPermiso, idRol);
+        }
+        
+        public System.Data.DataSet LeerPermisosXRoles(int idRol) {
+            return base.Channel.LeerPermisosXRoles(idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> LeerPermisosXRolesAsync(int idRol) {
+            return base.Channel.LeerPermisosXRolesAsync(idRol);
+        }
+        
+        public System.Data.DataSet AgregarGenero(string genero) {
+            return base.Channel.AgregarGenero(genero);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarGeneroAsync(string genero) {
+            return base.Channel.AgregarGeneroAsync(genero);
+        }
+        
+        public System.Data.DataSet ModificarGenero(int idGenero, string genero) {
+            return base.Channel.ModificarGenero(idGenero, genero);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarGeneroAsync(int idGenero, string genero) {
+            return base.Channel.ModificarGeneroAsync(idGenero, genero);
+        }
+        
+        public System.Data.DataSet EliminarGenero(int idGenero) {
+            return base.Channel.EliminarGenero(idGenero);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarGeneroAsync(int idGenero) {
+            return base.Channel.EliminarGeneroAsync(idGenero);
+        }
+        
+        public System.Data.DataSet LeerGenero(int inicio, int final) {
+            return base.Channel.LeerGenero(inicio, final);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> LeerGeneroAsync(int inicio, int final) {
+            return base.Channel.LeerGeneroAsync(inicio, final);
+        }
+        
+        public System.Data.DataSet AgregarPermisos(string permiso) {
+            return base.Channel.AgregarPermisos(permiso);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarPermisosAsync(string permiso) {
+            return base.Channel.AgregarPermisosAsync(permiso);
+        }
+        
+        public System.Data.DataSet ModificarPermisos(int idPermiso, string permiso) {
+            return base.Channel.ModificarPermisos(idPermiso, permiso);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarPermisosAsync(int idPermiso, string permiso) {
+            return base.Channel.ModificarPermisosAsync(idPermiso, permiso);
+        }
+        
+        public System.Data.DataSet EliminarPermisos(int idPermiso) {
+            return base.Channel.EliminarPermisos(idPermiso);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarPermisosAsync(int idPermiso) {
+            return base.Channel.EliminarPermisosAsync(idPermiso);
+        }
+        
+        public System.Data.DataSet Leer_Permisos(int inicio, int final) {
+            return base.Channel.Leer_Permisos(inicio, final);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> Leer_PermisosAsync(int inicio, int final) {
+            return base.Channel.Leer_PermisosAsync(inicio, final);
+        }
+        
+        public System.Data.DataSet AgregarContactos(string descripcionContacto, int idTipoContacto, int idTipoPersona) {
+            return base.Channel.AgregarContactos(descripcionContacto, idTipoContacto, idTipoPersona);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarContactosAsync(string descripcionContacto, int idTipoContacto, int idTipoPersona) {
+            return base.Channel.AgregarContactosAsync(descripcionContacto, idTipoContacto, idTipoPersona);
+        }
+        
+        public System.Data.DataSet ModificarContactos(int idContacto, string descripcionContacto, int idTipoContacto, int idTipoPersona) {
+            return base.Channel.ModificarContactos(idContacto, descripcionContacto, idTipoContacto, idTipoPersona);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarContactosAsync(int idContacto, string descripcionContacto, int idTipoContacto, int idTipoPersona) {
+            return base.Channel.ModificarContactosAsync(idContacto, descripcionContacto, idTipoContacto, idTipoPersona);
+        }
+        
+        public System.Data.DataSet EliminarContactos(int idContacto) {
+            return base.Channel.EliminarContactos(idContacto);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarContactosAsync(int idContacto) {
+            return base.Channel.EliminarContactosAsync(idContacto);
+        }
+        
+        public System.Data.DataSet Leer_Contactos(int idPersona) {
+            return base.Channel.Leer_Contactos(idPersona);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> Leer_ContactosAsync(int idPersona) {
+            return base.Channel.Leer_ContactosAsync(idPersona);
+        }
+        
+        public System.Data.DataSet AgregarTarjetas(string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado) {
+            return base.Channel.AgregarTarjetas(numeroTarjeta, expiracionMes, expiracionAnno, cvv, Personas_idPersona, Estados_idEstado);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarTarjetasAsync(string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado) {
+            return base.Channel.AgregarTarjetasAsync(numeroTarjeta, expiracionMes, expiracionAnno, cvv, Personas_idPersona, Estados_idEstado);
+        }
+        
+        public System.Data.DataSet ModificarTarjetas(int idTarjeta, string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado) {
+            return base.Channel.ModificarTarjetas(idTarjeta, numeroTarjeta, expiracionMes, expiracionAnno, cvv, Personas_idPersona, Estados_idEstado);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarTarjetasAsync(int idTarjeta, string numeroTarjeta, int expiracionMes, int expiracionAnno, string cvv, int Personas_idPersona, int Estados_idEstado) {
+            return base.Channel.ModificarTarjetasAsync(idTarjeta, numeroTarjeta, expiracionMes, expiracionAnno, cvv, Personas_idPersona, Estados_idEstado);
+        }
+        
+        public System.Data.DataSet EliminarTarjetas(int idTarjeta) {
+            return base.Channel.EliminarTarjetas(idTarjeta);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarTarjetasAsync(int idTarjeta) {
+            return base.Channel.EliminarTarjetasAsync(idTarjeta);
+        }
+        
+        public System.Data.DataSet Leer_Tarjetas(int idPersona) {
+            return base.Channel.Leer_Tarjetas(idPersona);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> Leer_TarjetasAsync(int idPersona) {
+            return base.Channel.Leer_TarjetasAsync(idPersona);
         }
     }
 }
