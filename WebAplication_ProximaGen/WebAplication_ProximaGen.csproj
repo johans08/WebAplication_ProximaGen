@@ -147,8 +147,10 @@
     <Compile Include="Models\Tarjetas.cs" />
     <Compile Include="Models\TipoContactos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Views\Maintenance\Contacto.cshtml" />
     <None Include="Views\Maintenance\Generos.cshtml" />
     <Content Include="Views\Maintenance\TipoContactos.cshtml" />
+    <Content Include="Views\Maintenance\Tarjetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\landing.css" />

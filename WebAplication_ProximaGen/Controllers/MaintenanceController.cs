@@ -236,12 +236,12 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
-        public List<Contactos> LeerContactos(int inicio)
+        public List<Contactos> LeerContactos(int idPersona)
         {
             try
             {
                 DataSet dsContactos = new DataSet();
-                dsContactos = wsClient.Leer_Contactos(inicio);
+                dsContactos = wsClient.Leer_Contactos(idPersona);
 
                 // Convertir los datos a una lista de objetos Contactos
                 var contactos = new List<Contactos>();
@@ -334,13 +334,13 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
-        public List<Tarjetas> LeerTarjetas(int inicio)
+        public List<Tarjetas> LeerTarjetas(int idPersona)
         {
 
             try
             {
                 DataSet dsTarjetas = new DataSet();
-                dsTarjetas = wsClient.Leer_Tarjetas(inicio);
+                dsTarjetas = wsClient.Leer_Tarjetas(idPersona);
 
                 // Convertir los datos a una lista de objetos Tarjetas
                 var tarjetas = new List<Tarjetas>();
@@ -381,11 +381,23 @@ namespace WebAplication_ProximaGen.Controllers
                 string response = "";
                 DataSet dsEstado = new DataSet();
 
-                dsEstado = wsClient.AgregarEstado(status.descripcionEstado);
-
-                foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                if (string.IsNullOrWhiteSpace(status.descripcionEstado)) 
                 {
-                    response = dr["response"].ToString();
+                    response = "Debe agregar la descripción del estado";
+                }
+                //Validar que no se digite números
+                else if (status.descripcionEstado.Any(char.IsDigit))
+                {
+                    response = "No se permite insertar números";
+                }
+                else
+                {
+                    dsEstado = wsClient.AgregarEstado(status.descripcionEstado);
+
+                    foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
                 }
 
                 // Codificar el mensaje para JavaScript
@@ -466,11 +478,23 @@ namespace WebAplication_ProximaGen.Controllers
                 string response = "";
                 DataSet dsPermiso = new DataSet();
 
-                dsPermiso = wsClient.AgregarPermisos(permissions.permiso);
-
-                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                if (string.IsNullOrWhiteSpace(permissions.permiso))
                 {
-                    response = dr["response"].ToString();
+                    response = "Debe agregar la descripción del permiso";
+                }
+                //Validar que no se digite números
+                else if (permissions.permiso.Any(char.IsDigit))
+                {
+                    response = "No se permite insertar números";
+                }
+                else
+                {
+                    dsPermiso = wsClient.AgregarPermisos(permissions.permiso);
+
+                    foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
                 }
 
                 // Codificar el mensaje para JavaScript
@@ -484,6 +508,7 @@ namespace WebAplication_ProximaGen.Controllers
             {
                 return View();
             }
+
         }
 
         [HttpPost]
@@ -543,6 +568,7 @@ namespace WebAplication_ProximaGen.Controllers
         }
 
         // POST: Maintenance/CreateRoles
+        
         [HttpPost]
         public ActionResult CreateRoles(Roles roles)
         {
@@ -551,25 +577,39 @@ namespace WebAplication_ProximaGen.Controllers
                 string response = "";
                 DataSet dsRol = new DataSet();
 
-                dsRol = wsClient.AgregarRol(roles.descripcionRol);
-
-                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                if (string.IsNullOrWhiteSpace(roles.descripcionRol))
                 {
-                    response = dr["response"].ToString();
+                    response = "Debe agregar la descripción del rol";
                 }
 
-                // Codificar el mensaje para JavaScript
+                //Validar que no se digite números
+                else if (roles.descripcionRol.Any(char.IsDigit))
+                {
+                    response = "No se permite insertar números";
+                }
+                else
+                {
+                    dsRol = wsClient.AgregarRol(roles.descripcionRol);
+
+                    foreach (DataRow dr in dsRol.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
+                }
+
                 response = HttpUtility.JavaScriptStringEncode(response);
 
-                TempData["response"] = response; // Mensaje de respuesta
-
+                TempData["response"] = response;
                 return RedirectToAction("Roles");
-            }
+                }
+                
             catch
             {
+
                 return View();
             }
         }
+        
 
         [HttpPost]
         public ActionResult UpdateRoles(Roles roles)
@@ -632,16 +672,29 @@ namespace WebAplication_ProximaGen.Controllers
         [HttpPost]
         public ActionResult CreateGenero(Generos generos)
         {
+
             try
             {
                 string response = "";
                 DataSet dsGenero = new DataSet();
 
-                dsGenero = wsClient.AgregarGenero(generos.genero);
-
-                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                if (string.IsNullOrWhiteSpace(generos.genero))
                 {
-                    response = dr["response"].ToString();
+                    response = "Debe agregar la descripción del género";
+                }
+                //Validar que no se digite números
+                else if (generos.genero.Any(char.IsDigit))
+                {
+                    response = "No se permite insertar números";
+                }
+                else
+                {
+                    dsGenero = wsClient.AgregarGenero(generos.genero);
+
+                    foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
                 }
 
                 // Codificar el mensaje para JavaScript
@@ -655,6 +708,7 @@ namespace WebAplication_ProximaGen.Controllers
             {
                 return View();
             }
+
         }
 
         [HttpPost]
@@ -807,11 +861,23 @@ namespace WebAplication_ProximaGen.Controllers
                 string response = "";
                 DataSet dsTipoContactos = new DataSet();
 
-                dsTipoContactos = wsClient.AgregarTipoContacto(tipocontactos.descripcionTipoContacto);
-
-                foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                if (string.IsNullOrWhiteSpace(tipocontactos.descripcionTipoContacto))
                 {
-                    response = dr["response"].ToString();
+                    response = "Debe agregar la descripción del tipo de contacto";
+                }
+                //Validar que no se digite números
+                else if (tipocontactos.descripcionTipoContacto.Any(char.IsDigit))
+                {
+                    response = "No se permite insertar números";
+                }
+                else
+                {
+                    dsTipoContactos = wsClient.AgregarTipoContacto(tipocontactos.descripcionTipoContacto);
+
+                    foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
                 }
 
                 // Codificar el mensaje para JavaScript
@@ -825,6 +891,7 @@ namespace WebAplication_ProximaGen.Controllers
             {
                 return View();
             }
+
         }
 
         [HttpPost]

@@ -35,7 +35,7 @@
                         <hr>
                         @using (Html.BeginForm("CreateGenero", "Maintenance", FormMethod.Post))
                         {
-                            <form onsubmit="return validarFormulario();">
+                            <form>
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         @Html.LabelFor(model => model.genero, "Descripción Género", new { @class = "form-label" })
@@ -139,30 +139,6 @@
 
 <script>
 
-    function validarFormulario() {
-        //Se obtiene el campo de descripcionrol
-        var descripcionGenero = document.getElementById("descripcionGeneroInput").value;
-
-        if (descripcionGenero === "") {
-            document.getElementById("errorMensaje").innerText = "La descripción del genero no puede estar vacía";
-            return false;
-        }
-
-        if (/^\s*$/.test(descripcionGenero)) {
-            document.getElementById("errorMensaje").innerText = "La descripción del genero no puede contener espacios vacío";
-            return false;
-        }
-
-        //Verifico si existe algun digito en el input--
-        if (/\d/.test(descripcionGenero)) {
-            document.getElementById("errorMensaje").innerText = "No se puede digitar números en la descripción";
-            return false;
-        }
-
-        return true;
-
-    }
-
     function AbrirModal(idGenero, genero) {
         const idGeneroInput = document.getElementById("idGenero");
         const descripcionGeneroInput = document.getElementById("descripcionGeneroInput");
@@ -173,6 +149,9 @@
         const editarModal = new bootstrap.Modal(document.getElementById("editarModal"));
         editarModal.show();
     }
+
+
+
 
     function EliminarDato(idGenero) {
 

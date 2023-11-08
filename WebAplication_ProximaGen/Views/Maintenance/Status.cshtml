@@ -38,7 +38,7 @@
                         <hr>
                         @using (Html.BeginForm("CreateStatus", "Maintenance", FormMethod.Post))
                         {
-                            <form>
+                            <form onsubmit="return validarFormulario();">
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         @Html.LabelFor(model => model.descripcionEstado, "Descripción Estado", new { @class = "form-label" })
@@ -141,6 +141,30 @@
 
 
 <script>
+
+    function validarFormulario() {
+        //Se obtiene el campo de descripcionStatus
+        var descripcionStatus = document.getElementById("descripcionEstadoInput").value;
+
+        if (descripcionStatus === "") {
+            document.getElementById("errorMensaje").innerText = "La descripción del estado no puede estar vacía";
+            return false;
+        }
+
+        if (/^\s*$/.test(descripcionStatus)) {
+            document.getElementById("errorMensaje").innerText = "La descripción del estado no puede contener espacios vacíos";
+            return false;
+        }
+
+        //Verifico si existe algun digito en el input --
+        if (/\d/.test(descripcionRol)) {
+            document.getElementById("errorMensaje").innerText = "No se pueden digitar números en la descripción";
+            return false;
+        }
+
+        return true;
+
+    }
 
     function AbrirModal(idEstado, descripcionEstado) {
         const idEstadoInput = document.getElementById("idEstado");

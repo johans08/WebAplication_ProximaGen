@@ -38,11 +38,13 @@
                         <hr>
                         @using (Html.BeginForm("CreateRoles", "Maintenance", FormMethod.Post))
                         {
-                            <form>
+                            <form onsubmit="return validarFormulario();">
+                                <!--LLamo a la funcion-->
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         @Html.LabelFor(model => model.descripcionRol, "Descripción Rol", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.descripcionRol, new { @class = "form-control", placeholder = "Rol" })
+                                        @Html.TextBoxFor(model => model.descripcionRol, new { @class = "form-control", placeholder = "Rol", @id = "descripcionRolInput" })
+                                        <span id="errorMensaje" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -63,7 +65,7 @@
                 <div class="card-body table-border-style">
                     @*<br>*@
                     <div class="form-group">
-                       @* <br>*@
+                        @* <br>*@
                     </div>
 
 
@@ -142,6 +144,30 @@
 
 <script>
 
+    function validarFormulario() {
+        //Se obtiene el campo de descripcionrol
+        var descripcionRol = document.getElementById("descripcionRolInput").value;
+
+        if (descripcionRol === "") {
+            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede estar vacía";
+            return false;
+        }
+
+        if (/^\s*$/.test(descripcionRol)) {
+            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede contener espacios vacío";
+            return false;
+        }
+
+        //Verifico si existe algun digito en el input--
+        if (/\d/.test(descripcionRol)) {
+            document.getElementById("errorMensaje").innerText = "No se puede digitar números en la descripción";
+            return false;
+        }
+
+        return true;
+
+    }
+
     function AbrirModal(idRol, descripcionRol) {
         const idRolInput = document.getElementById("idRol");
         const descripcionRolInput = document.getElementById("descripcionRolInput");
@@ -164,9 +190,12 @@
         var dataString = "idRol";
 
         EliminarDatosAjax(idRol, controller, action, successMessage, errorMessage, dataString);
+
+        //Actualizar datos
     }
 
 </script>
+
 
 @if (TempData["response"] != null)
 {
