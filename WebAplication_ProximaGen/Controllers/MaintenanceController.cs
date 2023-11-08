@@ -37,10 +37,7 @@ namespace WebAplication_ProximaGen.Controllers
             }
             catch (Exception ex)
             {
-                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
-                // Por ejemplo, puedes registrar el error en un archivo de registro:
-                // Log.Error(ex);
-                return View("ErrorView"); // Puedes crear una vista de error personalizada
+                return View("ErrorView"); 
             }
         }
 
@@ -341,9 +338,10 @@ namespace WebAplication_ProximaGen.Controllers
             try
             {
                 DataSet dsTarjetas = new DataSet();
-                dsTarjetas = wsClient.Leer_Tarjetas(idPersona);
+                DataSet dsPersonas = new DataSet();
+                DataSet dsEstados = new DataSet();
 
-                // Convertir los datos a una lista de objetos Tarjetas
+                dsTarjetas = wsClient.Leer_Tarjetas(idPersona);
                 var tarjetas = new List<Tarjetas>();
                 foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
                 {
@@ -359,6 +357,35 @@ namespace WebAplication_ProximaGen.Controllers
                     };
                     tarjetas.Add(tarjeta);
                 }
+
+
+                List<Personas> listaPersonas = new List<Personas>();
+                dsPersonas = wsClient.GetListadoPersonas();
+                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                {
+                    var personas = new Personas
+                    {
+                        idPersona = int.Parse(dr["idPersona"].ToString()),
+                        nombre = dr["nombre"].ToString()
+                    };
+                    listaPersonas.Add(personas);
+                }
+
+                TempData["listaPersonas"] = listaPersonas;
+
+                List<Status> listaEstados = new List<Status>();
+                dsEstados = wsClient.LeerEstados(0, 100);
+                foreach (DataRow dr in dsEstados.Tables[0].Rows)
+                {
+                    var estados = new Status
+                    {
+                        idEstado = int.Parse(dr["idEstado"].ToString()),
+                        descripcionEstado = dr["descripcionEstado"].ToString()
+                    };
+                    listaEstados.Add(estados);
+                }
+
+                TempData["listaEstados"] = listaEstados;
 
                 // Puedes almacenar la lista de tarjetas en TempData para que esté disponible en la vista
 
@@ -379,32 +406,32 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsEstado = new DataSet();
+                string response = ""; string responseCode = "";
 
-                if (string.IsNullOrWhiteSpace(status.descripcionEstado)) 
+                if (ModelState.IsValid)
                 {
-                    response = "Debe agregar la descripción del estado";
-                }
-                //Validar que no se digite números
-                else if (status.descripcionEstado.Any(char.IsDigit))
-                {
-                    response = "No se permite insertar números";
-                }
-                else
-                {
+                    DataSet dsEstado = new DataSet();
+
                     dsEstado = wsClient.AgregarEstado(status.descripcionEstado);
 
                     foreach (DataRow dr in dsEstado.Tables[0].Rows)
                     {
                         response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
                     }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
+                
 
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Status");
             }
@@ -419,31 +446,30 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
+                string response = ""; string responseCode = "";
 
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    response = "No puedes enviar datos vacios";
+                    DataSet dsEstado = new DataSet();
+
+                    dsEstado = wsClient.ModificarEstado(status.idEstado, status.descripcionEstado);
+
+                    foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
                     // Codificar el mensaje para JavaScript
                     response = HttpUtility.JavaScriptStringEncode(response);
-
-                    TempData["response"] = response; // Mensaje de respuesta
-                    return RedirectToAction("Status");
                 }
-                
-                DataSet dsEstado = new DataSet();
-
-                dsEstado = wsClient.ModificarEstado(status.idEstado,status.descripcionEstado);
-
-                foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                else
                 {
-                    response = dr["response"].ToString();
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Status");
             }
@@ -458,20 +484,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsEstado = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsEstado = wsClient.EliminarEstado(status.idEstado);
-
-                foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                if (status.idEstado != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsEstado = new DataSet();
+
+                    dsEstado = wsClient.EliminarEstado(status.idEstado);
+
+                    foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Status");
             }
@@ -487,32 +524,29 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
+                string response = ""; string responseCode = "";
                 DataSet dsPermiso = new DataSet();
 
-                if (string.IsNullOrWhiteSpace(permissions.permiso))
-                {
-                    response = "Debe agregar la descripción del permiso";
-                }
-                //Validar que no se digite números
-                else if (permissions.permiso.Any(char.IsDigit))
-                {
-                    response = "No se permite insertar números";
-                }
-                else
+                if (ModelState.IsValid)
                 {
                     dsPermiso = wsClient.AgregarPermisos(permissions.permiso);
 
                     foreach (DataRow dr in dsPermiso.Tables[0].Rows)
                     {
                         response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
                     }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Permissions");
             }
@@ -528,20 +562,32 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsPermiso = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsPermiso = wsClient.ModificarPermisos(permissions.idPermiso, permissions.permiso);
-
-                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsPermiso = new DataSet();
+
+                    dsPermiso = wsClient.ModificarPermisos(permissions.idPermiso, permissions.permiso);
+
+                    foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
+                
 
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Permissions");
             }
@@ -556,20 +602,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsPermiso = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsPermiso = wsClient.EliminarPermisos(permissions.idPermiso);
-
-                foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                if (permissions.idPermiso != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsPermiso = new DataSet();
+
+                    dsPermiso = wsClient.EliminarPermisos(permissions.idPermiso);
+
+                    foreach (DataRow dr in dsPermiso.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Permissions");
             }
@@ -586,35 +643,33 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsRol = new DataSet();
+                string response = ""; string responseCode = "";
 
-                if (string.IsNullOrWhiteSpace(roles.descripcionRol))
+                if (ModelState.IsValid)
                 {
-                    response = "Debe agregar la descripción del rol";
-                }
+                    DataSet dsRol = new DataSet();
 
-                //Validar que no se digite números
-                else if (roles.descripcionRol.Any(char.IsDigit))
-                {
-                    response = "No se permite insertar números";
-                }
-                else
-                {
                     dsRol = wsClient.AgregarRol(roles.descripcionRol);
 
                     foreach (DataRow dr in dsRol.Tables[0].Rows)
                     {
                         response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
                     }
+
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                response = HttpUtility.JavaScriptStringEncode(response);
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
-                TempData["response"] = response;
                 return RedirectToAction("Roles");
-                }
-                
+
+            }    
             catch
             {
 
@@ -628,20 +683,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsRol = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsRol = wsClient.ModificarRol(roles.idRol, roles.descripcionRol);
-
-                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsRol = new DataSet();
+
+                    dsRol = wsClient.ModificarRol(roles.idRol, roles.descripcionRol);
+
+                    foreach (DataRow dr in dsRol.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Roles");
             }
@@ -656,20 +722,32 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsRol = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsRol = wsClient.EliminarRol(roles.idRol);
 
-                foreach (DataRow dr in dsRol.Tables[0].Rows)
+                if (roles.idRol != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsRol = new DataSet();
+
+                    dsRol = wsClient.EliminarRol(roles.idRol);
+
+                    foreach (DataRow dr in dsRol.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Roles");
             }
@@ -687,32 +765,34 @@ namespace WebAplication_ProximaGen.Controllers
 
             try
             {
-                string response = "";
-                DataSet dsGenero = new DataSet();
+                string response = ""; string responseCode = "";
 
-                if (string.IsNullOrWhiteSpace(generos.genero))
+
+                if (ModelState.IsValid)
                 {
-                    response = "Debe agregar la descripción del género";
-                }
-                //Validar que no se digite números
-                else if (generos.genero.Any(char.IsDigit))
-                {
-                    response = "No se permite insertar números";
-                }
-                else
-                {
+                    DataSet dsGenero = new DataSet();
+
+
                     dsGenero = wsClient.AgregarGenero(generos.genero);
 
                     foreach (DataRow dr in dsGenero.Tables[0].Rows)
                     {
                         response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
                     }
+
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Generos");
             }
@@ -728,20 +808,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsGenero = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsGenero = wsClient.ModificarGenero(generos.idGenero, generos.genero);
-
-                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsGenero = new DataSet();
+
+                    dsGenero = wsClient.ModificarGenero(generos.idGenero, generos.genero);
+
+                    foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Generos");
             }
@@ -756,20 +847,30 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsGenero = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsGenero = wsClient.EliminarGenero(generos.idGenero);
-
-                foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                if (generos.idGenero != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsGenero = new DataSet();
+
+                    dsGenero = wsClient.EliminarGenero(generos.idGenero);
+
+                    foreach (DataRow dr in dsGenero.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Generos");
             }
@@ -785,20 +886,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsContactos = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsContactos = wsClient.AgregarContactos(contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
-
-                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsContactos = new DataSet();
+
+                    dsContactos = wsClient.AgregarContactos(contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
+
+                    foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Contactos");
             }
@@ -813,20 +925,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsContactos = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsContactos = wsClient.ModificarContactos(contactos.idContacto, contactos.descripcionContacto,contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
-
-                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsContactos = new DataSet();
+
+                    dsContactos = wsClient.ModificarContactos(contactos.idContacto, contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, contactos.Personas_idPersona);
+
+                    foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Contactos");
             }
@@ -841,20 +964,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsContactos = new DataSet();
-
-                dsContactos = wsClient.EliminarContactos(contactos.idContacto);
-
-                foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                string response = ""; string responseCode = "";
+                if (contactos.idContacto != 0)
                 {
-                    response = dr["response"].ToString();
+                    
+                    DataSet dsContactos = new DataSet();
+
+                    dsContactos = wsClient.EliminarContactos(contactos.idContacto);
+
+                    foreach (DataRow dr in dsContactos.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Contactos");
             }
@@ -870,32 +1004,30 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTipoContactos = new DataSet();
+                string response = ""; string responseCode = "";
 
-                if (string.IsNullOrWhiteSpace(tipocontactos.descripcionTipoContacto))
+                if (ModelState.IsValid)
                 {
-                    response = "Debe agregar la descripción del tipo de contacto";
-                }
-                //Validar que no se digite números
-                else if (tipocontactos.descripcionTipoContacto.Any(char.IsDigit))
-                {
-                    response = "No se permite insertar números";
-                }
-                else
-                {
+                    DataSet dsTipoContactos = new DataSet();
+
                     dsTipoContactos = wsClient.AgregarTipoContacto(tipocontactos.descripcionTipoContacto);
 
                     foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
                     {
                         response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
                     }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
                 }
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("TipoContactos");
             }
@@ -911,20 +1043,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTipoContacto = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsTipoContacto = wsClient.ModificarTipoContacto(tipocontacto.idTipoContacto, tipocontacto.descripcionTipoContacto);
-
-                foreach (DataRow dr in dsTipoContacto.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsTipoContacto = new DataSet();
+
+                    dsTipoContacto = wsClient.ModificarTipoContacto(tipocontacto.idTipoContacto, tipocontacto.descripcionTipoContacto);
+
+                    foreach (DataRow dr in dsTipoContacto.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("TipoContactos");
             }
@@ -939,20 +1082,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTipoContactos = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsTipoContactos = wsClient.EliminarContactos(tipocontactos.idTipoContacto);
-
-                foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                if (tipocontactos.idTipoContacto != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsTipoContactos = new DataSet();
+
+                    dsTipoContactos = wsClient.EliminarTipoContacto(tipocontactos.idTipoContacto);
+
+                    foreach (DataRow dr in dsTipoContactos.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("TipoContactos");
             }
@@ -968,20 +1122,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTarjetas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsTarjetas = wsClient.AgregarTarjetas(tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
-
-                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsTarjetas = new DataSet();
+
+                    dsTarjetas = wsClient.AgregarTarjetas(tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
+
+                    foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Tarjetas");
             }
@@ -996,20 +1161,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTarjetas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsTarjetas = wsClient.ModificarTarjetas(tarjetas.idTarjeta,tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
-
-                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsTarjetas = new DataSet();
+
+                    dsTarjetas = wsClient.ModificarTarjetas(tarjetas.idTarjeta, tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
+
+                    foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+               
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Tarjetas");
             }
@@ -1024,20 +1200,31 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsTarjetas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsTarjetas = wsClient.EliminarTarjetas(tarjetas.idTarjeta);
-
-                foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                if (tarjetas.idTarjeta != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsTarjetas = new DataSet();
+
+                    dsTarjetas = wsClient.EliminarTarjetas(tarjetas.idTarjeta);
+
+                    foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Tarjetas");
             }
@@ -1053,21 +1240,32 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsPersonas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsPersonas = wsClient.AgregarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
-                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
-
-                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsPersonas = new DataSet();
+
+                    dsPersonas = wsClient.AgregarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                        contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                    foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Person");
             }
@@ -1082,21 +1280,32 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsPersonas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsPersonas = wsClient.ModificarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
-                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
-
-                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                if (ModelState.IsValid)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsPersonas = new DataSet();
+
+                    dsPersonas = wsClient.ModificarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                        contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                    foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Person");
             }
@@ -1111,21 +1320,33 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
-                string response = "";
-                DataSet dsPersonas = new DataSet();
+                string response = ""; string responseCode = "";
 
-                dsPersonas = wsClient.EliminarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
-                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
 
-                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                if (persona.cedula != 0)
                 {
-                    response = dr["response"].ToString();
+                    DataSet dsPersonas = new DataSet();
+
+                    dsPersonas = wsClient.EliminarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                        contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                    foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
                 }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+                
 
-                // Codificar el mensaje para JavaScript
-                response = HttpUtility.JavaScriptStringEncode(response);
-
-                TempData["response"] = response; // Mensaje de respuesta
+                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
 
                 return RedirectToAction("Person");
             }

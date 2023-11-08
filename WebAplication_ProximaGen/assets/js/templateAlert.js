@@ -34,9 +34,24 @@ function EliminarEstado(idEstado, controller, action, mensajeSucces, mensajeErro
         data: data,
         success: function (data) {
             if (data.success) {
-                // Éxito, realizar alguna acción como recargar la tabla
-                // Puedes mostrar un mensaje de éxito si lo deseas
-                Swal.fire(mensajeSucces, 'success');
+                Swal.fire({
+                    title: "Eliminacion Correcta",
+                    text: mensajeSucces,
+                    icon: "success"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Si el usuario confirma, llama a la función para eliminar el estado
+                        EliminarEstado(id, controller, action, mensajeSucces, mensajeError, dataString);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "Eliminacion Correcta",
+                    text: mensajeSucces,
+                    icon: "success"
+                }).then((result) => {
+                    location.reload();
+                });
             }
         },
         error: function () {

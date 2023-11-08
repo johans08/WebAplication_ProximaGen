@@ -6,6 +6,42 @@
 
 @model WebAplication_ProximaGen.Models.Tarjetas
 
+
+@{
+    List<SelectListItem> GetListaMeses()
+    {
+        List<SelectListItem> meses = new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Enero", Value = "1" },
+            new SelectListItem { Text = "Febrero", Value = "2" },
+            new SelectListItem { Text = "Marzo", Value = "3" },
+            new SelectListItem { Text = "Abril", Value = "4" },
+            new SelectListItem { Text = "Mayo", Value = "5" },
+            new SelectListItem { Text = "Junio", Value = "6" },
+            new SelectListItem { Text = "Julio", Value = "7" },
+            new SelectListItem { Text = "Agosto", Value = "8" },
+            new SelectListItem { Text = "Septiembre", Value = "9" },
+            new SelectListItem { Text = "Octubre", Value = "10" },
+            new SelectListItem { Text = "Noviembre", Value = "11" },
+            new SelectListItem { Text = "Diciembre", Value = "12" }
+        };
+        return meses;
+    }
+
+    List<SelectListItem> GetListaAnnos()
+    {
+        List<SelectListItem> meses = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "2023", Value = "2023" },
+        new SelectListItem { Text = "2024", Value = "2024" },
+        new SelectListItem { Text = "2025", Value = "2025" },
+        new SelectListItem { Text = "2026", Value = "2026" },
+        new SelectListItem { Text = "2027", Value = "2027" }
+    };
+        return meses;
+    }
+}
+
 <section class="pc-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -35,24 +71,47 @@
                         <hr>
                         @using (Html.BeginForm("CreateTarjetas", "Maintenance", FormMethod.Post))
                         {
-                            <form onsubmit="return validarFormulario();">
+                            <form action="~/Maintenance/CreateTarjetas" method="post">
                                 <div class="row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.numeroTarjeta, "Numero de tarjeta", new { @class = "form-label" })
                                         @Html.TextBoxFor(model => model.numeroTarjeta, new { @class = "form-control", placeholder = "Numero de tarjeta" })
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.expiracionMes, "Mes en el que expira", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.expiracionMes, new { @class = "form-control", placeholder = "Mes en el que expira" })
+                                        @Html.DropDownListFor(model => model.expiracionMes, GetListaMeses(), new { @class = "form-control", placeholder = "Mes en el que expira" })
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.expiracionAnno, "Año en el que expira", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.expiracionAnno, new { @class = "form-control", placeholder = "Año en el que expira" })
+                                        @Html.DropDownListFor(model => model.expiracionMes, GetListaAnnos(), new { @class = "form-control", placeholder = "Anno en el que expira" })
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.cvv, "CVV", new { @class = "form-label" })
                                         @Html.TextBoxFor(model => model.cvv, new { @class = "form-control", placeholder = "CVV" })
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.Personas_idPersona, "Persona", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.Personas_idPersona, new { @class = "form-control", placeholder = "Persona" })
+                                        @if (TempData["listaPersonas"] != null)
+                                        {
+                                            <select name="personaId" id="personaId" class="form-control">
+                                                @foreach (var persona in TempData["listaPersonas"] as List<WebAplication_ProximaGen.Models.Personas>)
+                                                {
+                                                    <option class="form-control" value="@persona.idPersona">@persona.nombre</option>
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.Estados_idEstado, "Estado", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.Estados_idEstado, new { @class = "form-control", placeholder = "Estado" })
-
-
-                                        @*Igual ya regreso, voy por aguita, te quiero <3*@
+                                        @if (TempData["listaEstados"] != null)
+                                        {
+                                            <select name="idEstados" id="idEstados" class="form-control">
+                                                @foreach (var estado in TempData["listaEstados"] as List<WebAplication_ProximaGen.Models.Status>)
+                                                {
+                                                    <option class="form-control" value="@estado.idEstado">@estado.descripcionEstado</option>
+                                                }
+                                            </select>
+                                        }
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -163,29 +222,6 @@
 
 <script>
 
-    function validarFormulario() {
-        //Se obtiene el campo de descripcionrol
-        var descripcionRol = document.getElementById("descripcionRolInput").value;
-
-        if (descripcionRol === "") {
-            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede estar vacía";
-            return false;
-        }
-
-        if (/^\s*$/.test(descripcionRol)) {
-            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede contener espacios vacío";
-            return false;
-        }
-
-        //Verifico si existe algun digito en el input--
-        if (/\d/.test(descripcionRol)) {
-            document.getElementById("errorMensaje").innerText = "No se puede digitar números en la descripción";
-            return false;
-        }
-
-        return true;
-
-    }
 
     function AbrirModal(idGenero, genero) {
         const idGeneroInput = document.getElementById("idGenero");
@@ -214,16 +250,16 @@
 
 </script>
 
-@if (TempData["response"] != null)
+@if (TempData["responseCode"] != null)
 {
-    if (TempData["response"] == null)
+    if (TempData["responseCode"] == null)
     {
         <script>
             CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[1]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
@@ -231,7 +267,7 @@
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[2]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));

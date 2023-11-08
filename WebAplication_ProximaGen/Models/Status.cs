@@ -8,10 +8,11 @@ namespace WebAplication_ProximaGen.Models
 {
     public class Status
     {
-        [Required(ErrorMessage = "El id Estado es obligatorio")]
+        [Required(ErrorMessage = "El id es obligatorio")]
         public int idEstado { get; set; }
 
-        [Required(ErrorMessage = "La descripcion del estado es obligatoria")]
+        [StringLength(45)]
+        [Required(ErrorMessage = "La descripcion es obligatoria")]
         public string descripcionEstado { get; set; }
     }
 }

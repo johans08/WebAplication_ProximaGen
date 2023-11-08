@@ -7,6 +7,6 @@ namespace WebAplication_ProximaGen.Logica
 {
     public class Constantes
     {
-        public static List<string> responses = new List<string> { null, "se ha completado con", "No" };
+        public static List<int> responsesCode = new List<int> { 1 , 0 };
     }
 }

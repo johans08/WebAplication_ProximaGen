@@ -166,16 +166,16 @@
 
 </script>
 
-@if (TempData["response"] != null)
+@if (TempData["responseCode"] != null)
 {
-    if (TempData["response"] == null)
+    if (TempData["responseCode"] == null)
     {
         <script>
             CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[1]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
@@ -183,7 +183,7 @@
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[2]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));

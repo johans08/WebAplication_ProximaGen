@@ -38,11 +38,12 @@
                         <hr>
                         @using (Html.BeginForm("CreateStatus", "Maintenance", FormMethod.Post))
                         {
-                            <form onsubmit="return validarFormulario();">
+                            <form>
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         @Html.LabelFor(model => model.descripcionEstado, "Descripción Estado", new { @class = "form-label" })
                                         @Html.TextBoxFor(model => model.descripcionEstado, new { @class = "form-control", placeholder = "Estado" })
+                                        @Html.ValidationMessageFor(model => model.idEstado)
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -122,11 +123,13 @@
                     <div class="modal-body">
                         <div class="form-group">
                             @Html.LabelFor(model => model.idEstado)
-                            @Html.TextBoxFor(model => model.idEstado, new { @class = "form-control", @readonly = "readonly", @id = "idEstado", @type = "number"})
+                            @Html.TextBoxFor(model => model.idEstado, new { @class = "form-control", @readonly = "readonly", @id = "idEstado", @type = "number" })
+                            @Html.ValidationMessageFor(model => model.idEstado)
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.descripcionEstado)
                             @Html.TextBoxFor(model => model.descripcionEstado, new { @class = "form-control", @id = "descripcionEstadoInput" })
+                            @Html.ValidationMessageFor(model => model.descripcionEstado)
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -142,30 +145,6 @@
 
 <script>
 
-    function validarFormulario() {
-        //Se obtiene el campo de descripcionStatus
-        var descripcionStatus = document.getElementById("descripcionEstadoInput").value;
-
-        if (descripcionStatus === "") {
-            document.getElementById("errorMensaje").innerText = "La descripción del estado no puede estar vacía";
-            return false;
-        }
-
-        if (/^\s*$/.test(descripcionStatus)) {
-            document.getElementById("errorMensaje").innerText = "La descripción del estado no puede contener espacios vacíos";
-            return false;
-        }
-
-        //Verifico si existe algun digito en el input --
-        if (/\d/.test(descripcionRol)) {
-            document.getElementById("errorMensaje").innerText = "No se pueden digitar números en la descripción";
-            return false;
-        }
-
-        return true;
-
-    }
-
     function AbrirModal(idEstado, descripcionEstado) {
         const idEstadoInput = document.getElementById("idEstado");
         const descripcionEstadoInput = document.getElementById("descripcionEstadoInput");
@@ -176,9 +155,6 @@
         const editarModal = new bootstrap.Modal(document.getElementById("editarModal"));
         editarModal.show();
     }
-
-
-
 
     function EliminarDato(idEstado) {
 
@@ -193,16 +169,16 @@
 
 </script>
 
-@if (TempData["response"] != null)
+@if (TempData["responseCode"] != null)
 {
-    if (TempData["response"] == null)
+    if (TempData["responseCode"] == null)
     {
         <script>
             CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[1]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
@@ -210,7 +186,7 @@
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[2]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));

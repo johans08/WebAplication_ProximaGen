@@ -35,17 +35,17 @@
                         <hr>
                         @using (Html.BeginForm("CreateTipoContactos", "Maintenance", FormMethod.Post))
                         {
-                           <form onsubmit="return validarFormulario();">
-                               <div class="row">
-                                   <div class="form-group col-md-12">
-                                       @Html.LabelFor(model => model.descripcionTipoContacto, "Descripción Tipo Contacto", new { @class = "form-label" })
-                                       @Html.TextBoxFor(model => model.descripcionTipoContacto, new { @class = "form-control", placeholder = "Tipo Contacto" })
-                                   </div>
-                               </div>
-                               <div class="text-center">
-                                   <button type="submit" class="btn btn-primary mx-auto">Agregar Tipo Contacto</button>
-                               </div>
-                           </form>
+                            <form onsubmit="return validarFormulario();">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.LabelFor(model => model.descripcionTipoContacto, "Descripción Tipo Contacto", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.descripcionTipoContacto, new { @class = "form-control", placeholder = "Tipo Contacto" })
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Tipo Contacto</button>
+                                </div>
+                            </form>
                         }
                     </div>
                 </div>
@@ -187,16 +187,16 @@
 
 </script>
 
-@if (TempData["response"] != null)
+@if (TempData["responseCode"] != null)
 {
-    if (TempData["response"] == null)
+    if (TempData["responseCode"] == null)
     {
         <script>
             CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[1]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
@@ -204,7 +204,7 @@
         </script>
     }
 
-    if (TempData["response"].ToString().Contains(Constantes.responses[2]))
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
     {
         <script>
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
