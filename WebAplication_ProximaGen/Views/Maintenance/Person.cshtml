@@ -3,6 +3,10 @@
     ViewBag.Title = "Person";
 }
 
+@using WebAplication_ProximaGen.Logica
+
+@model WebAplication_ProximaGen.Models.Personas
+
 
 <section class="pc-container">
     <div class="pcoded-content">
@@ -29,79 +33,101 @@
                         <h5>Registrar Usuario</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="mt-5">Informacion Personal</h5>
+                        <h5 class="mt-5">Información Personal</h5>
                         <hr>
-                        <form>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputEmail4">Cedula</label>
-                                    <input type="number" class="form-control" id="inputEmail4" placeholder="Cedula">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputEmail4">Nombre</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Apellido</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Apellido">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Segundo Apellido</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Segundo Apellido">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputAddress">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" id="inputAddress" placeholder="Fecha de nacimiento">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputState">Genero</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Masculino</option>
-                                        <option>Femenino</option>
-                                        <option>Otro</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputAddress">Direccion</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Direccion">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Numero</label>
-                                    <input type="number" class="form-control" id="inputPassword4" placeholder="Numero">
-                                </div>
-                            </div>
-                            <h5 class="mt-5">Informacion Usuario</h5>
-                            <hr>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputEmail4">Usuario</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Usuario">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Correo electronico</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="gmail.com">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Contraseña</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Contraseña"><button class="btn btn-outline-primary" type="color"><i class="far fa-eye"></i></button>
+                        @using (Html.BeginForm("CreatePerson", "Maintenance", FormMethod.Post))
+                        {
+                            <form>
+                                <!--Llamo a la funcion-->
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.cedula, "Cédula", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.cedula, new { @class = "form-control", placeholder = "Cédula", @id = "cedulaInput" })
+
+                                        @*<label class="form-label" for="inputEmail4">Cedula</label>
+                                            <input type="number" class="form-control" id="inputEmail4" placeholder="Cedula">*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.nombre, "Nombre", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", placeholder = "Nombre", @id = "nombreInput" })
+
+                                        @*<label class="form-label" for="inputEmail4">Nombre</label>
+                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.apellido, "Primer Apellido", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.apellido, new { @class = "form-control", placeholder = "Primer Apellido", @id = "apellidoInput" })
+                                        @*<label class="form-label" for="inputPassword4">Apellido</label>
+                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Apellido">*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.apellido2, "Segundo Apellido", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.apellido2, new { @class = "form-control", placeholder = "Segundo Apellido", @id = "apellido2Input" })
+                                        @*<label class="form-label" for="inputPassword4">Segundo Apellido</label>
+                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Segundo Apellido">*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.fechaNacimiento, "Fecha nacimiento", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.fechaNacimiento, new { @class = "form-control", placeholder = "Fecha nacimiento", @id = "fechaNacimientoInput" })
+                                        @*<label class="form-label" for="inputAddress">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" id="inputAddress" placeholder="Fecha de nacimiento">*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.Generos_idGenero, "Género", new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.Generos_idGenero, new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Text = "Masculino", Value = "Masculino" },
+                                            new SelectListItem { Text = "Femenino", Value = "Femenino" }
+                                        }, new { @class = "form-control", id = "inputState" })
+
+                                        @*<label class="form-label" for="inputState">Genero</label>
+                                            <select id="inputState" class="form-control">
+                                                <option selected>Masculino</option>
+                                                <option>Femenino</option>
+                                                <option>Otro</option>
+                                            </select>*@
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputAddress">Direccion</label>
+                                        <input type="text" class="form-control" id="inputAddress" placeholder="Direccion">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputPassword4">Numero</label>
+                                        <input type="number" class="form-control" id="inputPassword4" placeholder="Numero">
                                     </div>
                                 </div>
+                                <h5 class="mt-5">Informacion Usuario</h5>
+                                <hr>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputEmail4">Usuario</label>
+                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Usuario">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputPassword4">Correo electronico</label>
+                                        <input type="password" class="form-control" id="inputPassword4" placeholder="gmail.com">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputPassword4">Contraseña</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="inputPassword4" placeholder="Contraseña"><button class="btn btn-outline-primary" type="color"><i class="far fa-eye"></i></button>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputState">Tipo de usuario</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Administrador</option>
-                                        <option>Profesor</option>
-                                        <option>Estudiante</option>
-                                    </select>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="inputState">Tipo de usuario</label>
+                                        <select id="inputState" class="form-control">
+                                            <option selected>Administrador</option>
+                                            <option>Profesor</option>
+                                            <option>Estudiante</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary mx-auto">Agregar Usuario</button>
-                            </div>
-                        </form>
-
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Usuario</button>
+                                </div>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>

@@ -239,6 +239,55 @@ namespace WebAplication_ProximaGen.WS_Client {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Leer_Tarjetas", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> Leer_TarjetasAsync(int idPersona);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPersona_Usuario_Contacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AgregarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarPersona_Usuario_Contacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AgregarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPersona_Usuario_Contacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarPersona_Usuario_Contacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPersona_Usuario_Contacto", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet EliminarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarPersona_Usuario_Contacto", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> EliminarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListadoPersonas", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetListadoPersonas();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListadoPersonas", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetListadoPersonasAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPersonaContactoUsuraioXCedula", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetPersonaContactoUsuraioXCedula(int cedula);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPersonaContactoUsuraioXCedula", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetPersonaContactoUsuraioXCedulaAsync(int cedula);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListadoUsuarios", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet GetListadoUsuarios();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListadoUsuarios", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GetListadoUsuariosAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Login", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Login(string usuario, string contrasenna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Login", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> LoginAsync(string usuario, string contrasenna);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -522,6 +571,62 @@ namespace WebAplication_ProximaGen.WS_Client {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> Leer_TarjetasAsync(int idPersona) {
             return base.Channel.Leer_TarjetasAsync(idPersona);
+        }
+        
+        public System.Data.DataSet AgregarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.AgregarPersona_Usuario_Contacto(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AgregarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.AgregarPersona_Usuario_ContactoAsync(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Data.DataSet ModificarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.ModificarPersona_Usuario_Contacto(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.ModificarPersona_Usuario_ContactoAsync(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Data.DataSet EliminarPersona_Usuario_Contacto(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.EliminarPersona_Usuario_Contacto(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> EliminarPersona_Usuario_ContactoAsync(int cedula, string nombre, string apellido, string apellido2, System.DateTime fechaNacimiento, int idGenero, int idEstado, string descripcionContacto, int idTipoContacto, string nombreUsuario, string contrasenna, string correo, int idRol) {
+            return base.Channel.EliminarPersona_Usuario_ContactoAsync(cedula, nombre, apellido, apellido2, fechaNacimiento, idGenero, idEstado, descripcionContacto, idTipoContacto, nombreUsuario, contrasenna, correo, idRol);
+        }
+        
+        public System.Data.DataSet GetListadoPersonas() {
+            return base.Channel.GetListadoPersonas();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetListadoPersonasAsync() {
+            return base.Channel.GetListadoPersonasAsync();
+        }
+        
+        public System.Data.DataSet GetPersonaContactoUsuraioXCedula(int cedula) {
+            return base.Channel.GetPersonaContactoUsuraioXCedula(cedula);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetPersonaContactoUsuraioXCedulaAsync(int cedula) {
+            return base.Channel.GetPersonaContactoUsuraioXCedulaAsync(cedula);
+        }
+        
+        public System.Data.DataSet GetListadoUsuarios() {
+            return base.Channel.GetListadoUsuarios();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GetListadoUsuariosAsync() {
+            return base.Channel.GetListadoUsuariosAsync();
+        }
+        
+        public System.Data.DataSet Login(string usuario, string contrasenna) {
+            return base.Channel.Login(usuario, contrasenna);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> LoginAsync(string usuario, string contrasenna) {
+            return base.Channel.LoginAsync(usuario, contrasenna);
         }
     }
 }

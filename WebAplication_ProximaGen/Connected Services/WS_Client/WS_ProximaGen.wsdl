@@ -703,6 +703,182 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AgregarPersona_Usuario_Contacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cedula" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido2" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fechaNacimiento" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="idGenero" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionContacto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasenna" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarPersona_Usuario_ContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarPersona_Usuario_ContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPersona_Usuario_Contacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cedula" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido2" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fechaNacimiento" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="idGenero" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionContacto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasenna" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPersona_Usuario_ContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarPersona_Usuario_ContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPersona_Usuario_Contacto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cedula" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido2" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fechaNacimiento" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="idGenero" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idEstado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcionContacto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idTipoContacto" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasenna" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarPersona_Usuario_ContactoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarPersona_Usuario_ContactoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListadoPersonas">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetListadoPersonasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListadoPersonasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPersonaContactoUsuraioXCedula">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cedula" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPersonaContactoUsuraioXCedulaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPersonaContactoUsuraioXCedulaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListadoUsuarios">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetListadoUsuariosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListadoUsuariosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasenna" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AgregarEstadoSoapIn">
@@ -897,6 +1073,48 @@
   <wsdl:message name="Leer_TarjetasSoapOut">
     <wsdl:part name="parameters" element="tns:Leer_TarjetasResponse" />
   </wsdl:message>
+  <wsdl:message name="AgregarPersona_Usuario_ContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarPersona_Usuario_Contacto" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPersona_Usuario_ContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarPersona_Usuario_ContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPersona_Usuario_ContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPersona_Usuario_Contacto" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPersona_Usuario_ContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPersona_Usuario_ContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPersona_Usuario_ContactoSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarPersona_Usuario_Contacto" />
+  </wsdl:message>
+  <wsdl:message name="EliminarPersona_Usuario_ContactoSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarPersona_Usuario_ContactoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListadoPersonasSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListadoPersonas" />
+  </wsdl:message>
+  <wsdl:message name="GetListadoPersonasSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListadoPersonasResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPersonaContactoUsuraioXCedulaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPersonaContactoUsuraioXCedula" />
+  </wsdl:message>
+  <wsdl:message name="GetPersonaContactoUsuraioXCedulaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPersonaContactoUsuraioXCedulaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListadoUsuariosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListadoUsuarios" />
+  </wsdl:message>
+  <wsdl:message name="GetListadoUsuariosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListadoUsuariosResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
   <wsdl:portType name="WS_ProximaGenSoap">
     <wsdl:operation name="AgregarEstado">
       <wsdl:input message="tns:AgregarEstadoSoapIn" />
@@ -1025,6 +1243,34 @@
     <wsdl:operation name="Leer_Tarjetas">
       <wsdl:input message="tns:Leer_TarjetasSoapIn" />
       <wsdl:output message="tns:Leer_TarjetasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPersona_Usuario_Contacto">
+      <wsdl:input message="tns:AgregarPersona_Usuario_ContactoSoapIn" />
+      <wsdl:output message="tns:AgregarPersona_Usuario_ContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPersona_Usuario_Contacto">
+      <wsdl:input message="tns:ModificarPersona_Usuario_ContactoSoapIn" />
+      <wsdl:output message="tns:ModificarPersona_Usuario_ContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPersona_Usuario_Contacto">
+      <wsdl:input message="tns:EliminarPersona_Usuario_ContactoSoapIn" />
+      <wsdl:output message="tns:EliminarPersona_Usuario_ContactoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoPersonas">
+      <wsdl:input message="tns:GetListadoPersonasSoapIn" />
+      <wsdl:output message="tns:GetListadoPersonasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonaContactoUsuraioXCedula">
+      <wsdl:input message="tns:GetPersonaContactoUsuraioXCedulaSoapIn" />
+      <wsdl:output message="tns:GetPersonaContactoUsuraioXCedulaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoUsuarios">
+      <wsdl:input message="tns:GetListadoUsuariosSoapIn" />
+      <wsdl:output message="tns:GetListadoUsuariosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WS_ProximaGenSoap" type="tns:WS_ProximaGenSoap">
@@ -1317,6 +1563,69 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AgregarPersona_Usuario_Contacto">
+      <soap:operation soapAction="http://tempuri.org/AgregarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPersona_Usuario_Contacto">
+      <soap:operation soapAction="http://tempuri.org/ModificarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPersona_Usuario_Contacto">
+      <soap:operation soapAction="http://tempuri.org/EliminarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoPersonas">
+      <soap:operation soapAction="http://tempuri.org/GetListadoPersonas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonaContactoUsuraioXCedula">
+      <soap:operation soapAction="http://tempuri.org/GetPersonaContactoUsuraioXCedula" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoUsuarios">
+      <soap:operation soapAction="http://tempuri.org/GetListadoUsuarios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WS_ProximaGenSoap12" type="tns:WS_ProximaGenSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1601,6 +1910,69 @@
     </wsdl:operation>
     <wsdl:operation name="Leer_Tarjetas">
       <soap12:operation soapAction="http://tempuri.org/Leer_Tarjetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPersona_Usuario_Contacto">
+      <soap12:operation soapAction="http://tempuri.org/AgregarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPersona_Usuario_Contacto">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPersona_Usuario_Contacto">
+      <soap12:operation soapAction="http://tempuri.org/EliminarPersona_Usuario_Contacto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoPersonas">
+      <soap12:operation soapAction="http://tempuri.org/GetListadoPersonas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonaContactoUsuraioXCedula">
+      <soap12:operation soapAction="http://tempuri.org/GetPersonaContactoUsuraioXCedula" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListadoUsuarios">
+      <soap12:operation soapAction="http://tempuri.org/GetListadoUsuarios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

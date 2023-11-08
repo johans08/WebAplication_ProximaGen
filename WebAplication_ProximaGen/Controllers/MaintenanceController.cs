@@ -322,6 +322,7 @@ namespace WebAplication_ProximaGen.Controllers
             try
             {
                 var tarjetas = LeerTarjetas(0);//0,100
+                
                 TempData["Tarjetas"] = tarjetas;
                 return View();
             }
@@ -419,6 +420,17 @@ namespace WebAplication_ProximaGen.Controllers
             try
             {
                 string response = "";
+
+                if (!ModelState.IsValid)
+                {
+                    response = "No puedes enviar datos vacios";
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+
+                    TempData["response"] = response; // Mensaje de respuesta
+                    return RedirectToAction("Status");
+                }
+                
                 DataSet dsEstado = new DataSet();
 
                 dsEstado = wsClient.ModificarEstado(status.idEstado,status.descripcionEstado);
@@ -1034,5 +1046,100 @@ namespace WebAplication_ProximaGen.Controllers
                 return View();
             }
         }
+
+
+        //---------------------------------------------------------
+        public ActionResult CreatePerson(Personas persona, Usuarios usuarios, Contactos contactos, Roles rol)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPersonas = new DataSet();
+
+                dsPersonas = wsClient.AgregarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Person");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePerson(Personas persona, Usuarios usuarios, Contactos contactos, Roles rol)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPersonas = new DataSet();
+
+                dsPersonas = wsClient.ModificarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Person");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeletePerson(Personas persona, Usuarios usuarios, Contactos contactos, Roles rol)
+        {
+            try
+            {
+                string response = "";
+                DataSet dsPersonas = new DataSet();
+
+                dsPersonas = wsClient.EliminarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
+                    contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+
+                foreach (DataRow dr in dsPersonas.Tables[0].Rows)
+                {
+                    response = dr["response"].ToString();
+                }
+
+                // Codificar el mensaje para JavaScript
+                response = HttpUtility.JavaScriptStringEncode(response);
+
+                TempData["response"] = response; // Mensaje de respuesta
+
+                return RedirectToAction("Person");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+
+
+
+
     }
 }

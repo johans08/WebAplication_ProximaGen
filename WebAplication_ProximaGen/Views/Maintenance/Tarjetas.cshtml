@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Generos";
+    ViewBag.Title = "Tarjetas";
 }
 
 @using WebAplication_ProximaGen.Logica
 
-@model WebAplication_ProximaGen.Models.Generos
+@model WebAplication_ProximaGen.Models.Tarjetas
 
 <section class="pc-container">
     <div class="pcoded-content">
@@ -18,7 +18,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
                             <li class="breadcrumb-item"><a href="#!">Registros</a></li>
-                            <li class="breadcrumb-item">Generos</li>
+                            <li class="breadcrumb-item">Tarjetas</li>
                         </ul>
                     </div>
                 </div>
@@ -28,22 +28,35 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Registrar Genero</h5>
+                        <h5>Registrar Tarjet</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="mt-5">Información Género</h5>
+                        <h5 class="mt-5">Información Tarjetas</h5>
                         <hr>
-                        @using (Html.BeginForm("CreateGenero", "Maintenance", FormMethod.Post))
+                        @using (Html.BeginForm("CreateTarjetas", "Maintenance", FormMethod.Post))
                         {
-                            <form>
+                            <form onsubmit="return validarFormulario();">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        @Html.LabelFor(model => model.genero, "Descripción Género", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.genero, new { @class = "form-control", placeholder = "Género" })
+                                        @Html.LabelFor(model => model.numeroTarjeta, "Numero de tarjeta", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.numeroTarjeta, new { @class = "form-control", placeholder = "Numero de tarjeta" })
+                                        @Html.LabelFor(model => model.expiracionMes, "Mes en el que expira", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.expiracionMes, new { @class = "form-control", placeholder = "Mes en el que expira" })
+                                        @Html.LabelFor(model => model.expiracionAnno, "Año en el que expira", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.expiracionAnno, new { @class = "form-control", placeholder = "Año en el que expira" })
+                                        @Html.LabelFor(model => model.cvv, "CVV", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.cvv, new { @class = "form-control", placeholder = "CVV" })
+                                        @Html.LabelFor(model => model.Personas_idPersona, "Persona", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.Personas_idPersona, new { @class = "form-control", placeholder = "Persona" })
+                                        @Html.LabelFor(model => model.Estados_idEstado, "Estado", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.Estados_idEstado, new { @class = "form-control", placeholder = "Estado" })
+
+
+                                        @*Igual ya regreso, voy por aguita, te quiero <3*@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Género</button>
+                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Tarjeta</button>
                                 </div>
                             </form>
                         }
@@ -54,8 +67,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Reporte de Género</h5>
-                    <span class="d-block m-t-5">Este <code>reporte</code> muestra los géneros creados</span>
+                    <h5>Reporte de Tarjeta</h5>
+                    <span class="d-block m-t-5">Este <code>reporte</code> muestra los datos de la tarjeta</span>
                 </div>
                 <div class="card-body table-border-style">
                     @*<br>*@
@@ -65,25 +78,36 @@
 
 
                     <div class="table-responsive">
-                        <table id="tableGenero" class="table">
+                        <table id="tableTarjeta" class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Descripción</th>
+                                    <th>Numero de la tarjeta</th>
+                                    <th>Mes expiración</th>
+                                    <th>Año expiración</th>
+                                    <th>CVV</th>
+                                    <th>Persona</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (TempData["Generos"] != null)
+                                @if (TempData["Tarjetas"] != null)
                                 {
-                                    foreach (var genero in TempData["Generos"] as List<WebAplication_ProximaGen.Models.Generos>)
+                                    foreach (var tarjeta in TempData["Tarjetas"] as List<WebAplication_ProximaGen.Models.Tarjetas>)
                                     {
                                         <tr>
-                                            <td>@genero.idGenero</td>
-                                            <td>@genero.genero</td>
+                                            <td>@tarjeta.idTarjeta</td>
+                                            <td>@tarjeta.numeroTarjeta</td>
+                                            <td>@tarjeta.expiracionMes</td>
+                                            <td>@tarjeta.expiracionAnno</td>
+                                            <td>@tarjeta.cvv</td>
+                                            <td>@tarjeta.Personas_idPersona</td>
+                                            <td>@tarjeta.Estados_idEstado</td>
+
                                             <td>
-                                                <a href="#" class="edit-icon" data-id="@genero.idGenero" onclick="AbrirModal('@genero.idGenero', '@genero.genero');"><i class="fas fa-pen"></i></a>
-                                                <a href="#" class="delete-icon" data-id="@genero.idGenero" onclick="EliminarDato(@genero.idGenero);"><i class="fas fa-trash"></i></a>
+                                                <a href="#" class="edit-icon" data-id="@tarjeta.idTarjeta" onclick="AbrirModal('@tarjeta.idTarjeta', '@tarjeta.numeroTarjeta','@tarjeta.expiracionMes','@tarjeta.expiracionAnno','@tarjeta.cvv','@tarjeta.Personas_idPersona','@tarjeta.Estados_idEstado');"><i class="fas fa-pen"></i></a>
+                                                <a href="#" class="delete-icon" data-id="@tarjeta.idTarjeta" onclick="EliminarDato(@tarjeta.idTarjeta);"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     }
@@ -113,17 +137,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @using (Html.BeginForm("UpdateGenero", "Maintenance", FormMethod.Post))
+            @using (Html.BeginForm("UpdateTarjetas", "Maintenance", FormMethod.Post))
             {
                 <form>
                     <div class="modal-body">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.idGenero)
-                            @Html.TextBoxFor(model => model.idGenero, new { @class = "form-control", @readonly = "readonly", @id = "idGenero" })
+                            @Html.LabelFor(model => model.idTarjeta)
+                            @Html.TextBoxFor(model => model.idTarjeta, new { @class = "form-control", @readonly = "readonly", @id = "idGenero" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.genero)
-                            @Html.TextBoxFor(model => model.genero, new { @class = "form-control", @id = "descripcionGeneroInput" })
+                            @Html.LabelFor(model => model.idTarjeta)
+                            @Html.TextBoxFor(model => model.idTarjeta, new { @class = "form-control", @id = "descripcionGeneroInput" })
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -138,6 +162,30 @@
 
 
 <script>
+
+    function validarFormulario() {
+        //Se obtiene el campo de descripcionrol
+        var descripcionRol = document.getElementById("descripcionRolInput").value;
+
+        if (descripcionRol === "") {
+            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede estar vacía";
+            return false;
+        }
+
+        if (/^\s*$/.test(descripcionRol)) {
+            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede contener espacios vacío";
+            return false;
+        }
+
+        //Verifico si existe algun digito en el input--
+        if (/\d/.test(descripcionRol)) {
+            document.getElementById("errorMensaje").innerText = "No se puede digitar números en la descripción";
+            return false;
+        }
+
+        return true;
+
+    }
 
     function AbrirModal(idGenero, genero) {
         const idGeneroInput = document.getElementById("idGenero");
