@@ -444,3 +444,7 @@
     </div>
 </div>
 
+@if (TempData["responseCode"] != null)
+{
+    TempData["responseCode"] = null;
+}

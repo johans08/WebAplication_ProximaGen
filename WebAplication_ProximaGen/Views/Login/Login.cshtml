@@ -74,6 +74,7 @@
             <script>
                 CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
             </script>
+            TempData["responseCode"] = null;
         }
 
         if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
@@ -82,6 +83,7 @@
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
             CreateAlert('Redirigiendo', 'success', decodedResponse);
             </script>
+            TempData["responseCode"] = null;
         }
 
         if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
@@ -90,6 +92,7 @@
             var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
             CreateAlert('Credenciales Invalidas', 'error', decodedResponse);
             </script>
+            TempData["responseCode"] = null;
         }
     }
 

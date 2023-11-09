@@ -57,11 +57,10 @@
                         <a href="index.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a>
                     </li>
                     <li class="pc-item pc-caption">
-                        <label>Elements</label>
-                        <span>UI Components</span>
+                        <label>Administración</label>
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Basic</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Mantenimientos</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li>@Html.ActionLink("Personas", "Person", "Maintenance", new { area = "" }, new { @class = "pc-link" })</li>
                             <li>@Html.ActionLink("Estado", "Status", "Maintenance", new { area = "" }, new { @class = "pc-link" })</li>
@@ -71,23 +70,10 @@
                             <li>@Html.ActionLink("Tipo Contacto", "TipoContactos", "Maintenance", new { area = "" }, new { @class = "pc-link" })</li>
                             <li>@Html.ActionLink("Tarjeta", "Tarjetas", "Maintenance", new { area = "" }, new { @class = "pc-link" })</li>
                             <li>@Html.ActionLink("Género", "Generos", "Maintenance", new { area = "" }, new { @class = "pc-link" })</li>
-                            <li class="pc-item"><a class="pc-link" href="bc_button.html">Button</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_badges.html">Badges</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_breadcrumb-pagination.html">Breadcrumb & paggination</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_card.html">Cards</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_collapse.html">Collapse</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_carousel.html">Carousel</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_progress.html">Progress</a></li>
-                            <li class="pc-item"><a class="pc-link" href="bc_modal.html">Modal</a></li>
-
-                            <li class="pc-item"><a class="pc-link" href="bc_typography.html">Typography</a></li>
                         </ul>
                     </li>
-                    <li class="pc-item">
-                        <a href="icon-feather.html" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Icons</span></a>
-                    </li>
                     <li class="pc-item pc-caption">
-                        <label>Forms</label>
+                        <label>Cursos</label>
                     </li>
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Forms Elements</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -250,7 +236,7 @@
                     </li>
                     <li class="dropdown pc-h-item">
                         <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="~/assets/images/user/img-avatar-2.jpg" alt="user-image" class="user-avtar">
+                            <img src="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" alt="user-image" class="user-avtar">
                             <span>
                                 <span class="user-name">@Session["Usuario"]</span>
                                 <span class="user-desc">@Session["Rol"]</span>

@@ -38,12 +38,12 @@
                         <hr>
                         @using (Html.BeginForm("CreateRoles", "Maintenance", FormMethod.Post))
                         {
-                            <form onsubmit="return validarFormulario();">
+                            <form>
                                 <!--LLamo a la funcion-->
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         @Html.LabelFor(model => model.descripcionRol, "Descripción Rol", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.descripcionRol, new { @class = "form-control", placeholder = "Rol", @id = "descripcionRolInput" })
+                                        @Html.TextBoxFor(model => model.descripcionRol, new { @class = "form-control", placeholder = "Rol", @id = "descripcionRol" })
                                         <span id="errorMensaje" style="color: red;"></span>
                                     </div>
                                 </div>
@@ -144,30 +144,6 @@
 
 <script>
 
-    function validarFormulario() {
-        //Se obtiene el campo de descripcionrol
-        var descripcionRol = document.getElementById("descripcionRolInput").value;
-
-        if (descripcionRol === "") {
-            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede estar vacía";
-            return false;
-        }
-
-        if (/^\s*$/.test(descripcionRol)) {
-            document.getElementById("errorMensaje").innerText = "La descripción del rol no puede contener espacios vacío";
-            return false;
-        }
-
-        //Verifico si existe algun digito en el input--
-        if (/\d/.test(descripcionRol)) {
-            document.getElementById("errorMensaje").innerText = "No se puede digitar números en la descripción";
-            return false;
-        }
-
-        return true;
-
-    }
-
     function AbrirModal(idRol, descripcionRol) {
         const idRolInput = document.getElementById("idRol");
         const descripcionRolInput = document.getElementById("descripcionRolInput");
@@ -221,4 +197,6 @@
             CreateAlert('Creación Denegada', 'error', decodedResponse);
         </script>
     }
+
+    TempData["responseCode"] = null;
 }
