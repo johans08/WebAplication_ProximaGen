@@ -3,7 +3,8 @@
     Layout = null;
 }
 
-
+@using WebAplication_ProximaGen.Logica
+@model WebAplication_ProximaGen.Models.Usuarios
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,18 +42,20 @@
                 <div class="row align-items-center text-center">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <img src="https://i.pcmag.com/imagery/reviews/06KRj2q8KBICEBe21MsFOEa-22.fit_scale.size_760x427.v1695303316.jpg"
-                                 alt="" class="img-fluid mb-4">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i data-feather="user"></i></span>
-                                <input type="text" class="form-control" placeholder="Usuario">
-                            </div>
-                            <div class="input-group mb-4">
-                                <span class="input-group-text"><i data-feather="lock"></i></span>
-                                <input type="password" class="form-control" placeholder="Contraseña">
-                            </div>
-                            <button class="btn btn-block btn-primary mb-4">Iniciar Sesión</button>
-                            <p class="mb-0 text-muted">Olvido Contraseña? <a href="auth-signup.html" class="f-w-400">Recuperar</a></p>
+                            <form action="~/Login/LoginUser" method="post">
+                                <img src="https://i.pcmag.com/imagery/reviews/06KRj2q8KBICEBe21MsFOEa-22.fit_scale.size_760x427.v1695303316.jpg"
+                                     alt="" class="img-fluid mb-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i data-feather="user"></i></span>
+                                    @Html.TextBoxFor(model => model.nombreUsuarios, new { @class = "form-control", placeholder = "Usuario" })
+                                </div>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-text"><i data-feather="lock"></i></span>
+                                    @Html.TextBoxFor(model => model.contrasenna, new { @class = "form-control", placeholder = "Contraseña", @type = "Password" })
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary mb-4">Iniciar Sesión</button>
+                                <p class="mb-0 text-muted">Olvido Contraseña? <a href="auth-signup.html" class="f-w-400">Recuperar</a></p>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -60,7 +63,38 @@
         </div>
     </div>
 
+
     @Scripts.Render("~/bundles/js-sweetalert")
+
+
+    @if (TempData["responseCode"] != null)
+    {
+        if (TempData["responseCode"] == null)
+        {
+            <script>
+                CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
+            </script>
+        }
+
+        if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
+        {
+            <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Redirigiendo', 'success', decodedResponse);
+            </script>
+        }
+
+        if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
+        {
+            <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Credenciales Invalidas', 'error', decodedResponse);
+            </script>
+        }
+    }
+
+
+
 
 
     @Scripts.Render("~/bundles/js-principal")
