@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.expiracionAnno, "Año en el que expira", new { @class = "form-label" })
-                                        @Html.DropDownListFor(model => model.expiracionMes, GetListaAnnos(), new { @class = "form-control", placeholder = "Anno en el que expira" })
+                                        @Html.DropDownListFor(model => model.expiracionAnno, GetListaAnnos(), new { @class = "form-control", placeholder = "Anno en el que expira" })
                                     </div>
                                     <div class="form-group col-md-6">
                                         @Html.LabelFor(model => model.cvv, "CVV", new { @class = "form-label" })
@@ -93,7 +93,7 @@
                                         @Html.LabelFor(model => model.Personas_idPersona, "Persona", new { @class = "form-label" })
                                         @if (TempData["listaPersonas"] != null)
                                         {
-                                            <select name="personaId" id="personaId" class="form-control">
+                                            <select name="Personas_idPersona" id="Personas_idPersona" class="form-control">
                                                 @foreach (var persona in TempData["listaPersonas"] as List<WebAplication_ProximaGen.Models.Personas>)
                                                 {
                                                     <option class="form-control" value="@persona.idPersona">@persona.nombre</option>
@@ -105,7 +105,7 @@
                                         @Html.LabelFor(model => model.Estados_idEstado, "Estado", new { @class = "form-label" })
                                         @if (TempData["listaEstados"] != null)
                                         {
-                                            <select name="idEstados" id="idEstados" class="form-control">
+                                            <select name="Estados_idEstado" id="Estados_idEstado" class="form-control">
                                                 @foreach (var estado in TempData["listaEstados"] as List<WebAplication_ProximaGen.Models.Status>)
                                                 {
                                                     <option class="form-control" value="@estado.idEstado">@estado.descripcionEstado</option>

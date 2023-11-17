@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Asignar Permiso";
+}
+
+@using WebAplication_ProximaGen.Logica
+
+@model WebAplication_ProximaGen.Models.AsignarPermisos
+
+<section class="pc-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Registros</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Mantenimiento</a></li>
+                            <li class="breadcrumb-item">Asignar Permisos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Asignar permisos por roles</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-5">Ecoge el permiso</h5>
+                        <hr>
+                        @using (Html.BeginForm("CreateAsignarPermiso", "Maintenance", FormMethod.Post))
+                        {
+                            <form action="~/Maintenance/CreateAsignarPermiso" method="post">
+                                <div class="row">
+                                    
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.idPermiso, "Permiso", new { @class = "form-label" })
+                                        @if (TempData["listaPermisos"] != null)
+                                        {
+                                            <select name="idPermiso" id="idPermiso" class="form-control">
+                                                @foreach (var permiso in TempData["listaPermisos"] as List<WebAplication_ProximaGen.Models.Permissions>)
+                                                {
+                                                    <option class="form-control" value="@permiso.idPermiso">@permiso.permiso</option>
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.idRol, "Rol", new { @class = "form-label" })
+                                        @if (TempData["listaRoles"] != null)
+                                        {
+                                            <select name="idRol" id="idRol" class="form-control">
+                                                @foreach (var rol in TempData["listaRoles"] as List<WebAplication_ProximaGen.Models.Roles>)
+                                                {
+                                                    <option class="form-control" value="@rol.idRol">@rol.descripcionRol</option>
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Asignar Rol</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Listado de permisos por rol</h5>
+                    <span class="d-block m-t-5">Este <code>lista</code> muestra los permisos asociados al rol</span>
+                </div>
+                <div class="card-body table-border-style">
+                    @*<br>*@
+                    @using (Html.BeginForm("LeerPermisosXRolQuery", "Maintenance", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idRol, "Rol", new { @class = "form-label" })
+                            @if (TempData["listaRoles"] != null)
+                            {
+                                <select name="idRol" id="idRol" class="form-control">
+                                    @foreach (var rol in TempData["listaRoles"] as List<WebAplication_ProximaGen.Models.Roles>)
+                                    {
+                                        <option class="form-control" value="@rol.idRol">@rol.descripcionRol</option>
+                                    }
+                                </select>
+                            }
+                            <br>
+                            <input type="submit" value="Seleccionar" class="btn btn-primary" />
+                            <br>
+                        </div>
+                    }
+
+
+
+                    <div class="table-responsive">
+                        <table id="tableTarjeta" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id Permiso</th>
+                                    <th>Permiso</th>
+                                    <th>Id Rol</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["permisosXRoles"] != null)
+                                {
+                                    foreach (var permisosXRol in TempData["permisosXRoles"] as List<WebAplication_ProximaGen.Models.AsignarPermisos>)
+                                    {
+                                        <tr>
+                                            <td>@permisosXRol.idPermiso</td>
+                                            <td>@permisosXRol.permiso</td>
+                                            <td>@permisosXRol.idRol</td>
+                                            <td>@permisosXRol.rol</td>
+                                            <td>
+                                                <a href="#" class="edit-icon" data-id="@permisosXRol.idPermiso" onclick="AbrirModal('@permisosXRol.idPermiso', '@permisosXRol.idRol');"><i class="fas fa-pen"></i></a>
+                                                <a href="#" class="delete-icon" data-id="@permisosXRol.idPermiso" onclick="EliminarDato(@permisosXRol.idPermiso);"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <!-- Agrega los botones de exportación aquí -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para editar datos -->
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Editar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("UpdateAsignarPermiso", "Maintenance", FormMethod.Post))
+            {
+                <form>
+                    <div class="modal-body">
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.idPermiso, "Permiso", new { @class = "form-label" })
+                            @if (TempData["listaPermisos"] != null)
+                            {
+                                <select name="idSelectRol" id="idSelectRol" class="form-control">
+                                    @foreach (var persona in TempData["listaPermisos"] as List<WebAplication_ProximaGen.Models.Permissions>)
+                                    {
+                                        <option class="form-control" value="@persona.idPermiso">@persona.permiso</option>
+                                    }
+                                </select>
+                            }
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.idRol, "Rol", new { @class = "form-label" })
+                            @if (TempData["listaRoles"] != null)
+                            {
+                                <select name="idSelectRol" id="idSelectPermiso" class="form-control">
+                                    @foreach (var estado in TempData["listaRoles"] as List<WebAplication_ProximaGen.Models.Roles>)
+                                    {
+                                        <option class="form-control" value="@estado.idRol">@estado.descripcionRol</option>
+                                    }
+                                </select>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function AbrirModal(idGenero, genero) {
+        const idGeneroInput = document.getElementById("idSelectRol").value;
+        const descripcionGeneroInput = document.getElementById("idSelectPermiso").value;
+
+        idGeneroInput.value = idGenero;
+        descripcionGeneroInput.value = genero;
+
+        const editarModal = new bootstrap.Modal(document.getElementById("editarModal"));
+        editarModal.show();
+    }
+
+
+
+
+    function EliminarDato(idGenero) {
+
+        var controller = "Maintenance";
+        var action = "DeleteGenero";
+        var successMessage = "Se eliminó el género con éxito";
+        var errorMessage = "No se ha eliminado, hubo un error de comunicación";
+        var dataString = "idGenero";
+
+        EliminarDatosAjax(idGenero, controller, action, successMessage, errorMessage, dataString);
+    }
+
+</script>
+
+@if (TempData["responseCode"] != null)
+{
+    if (TempData["responseCode"] == null)
+    {
+        <script>
+            CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
+        </script>
+    }
+
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creación Exitosa', 'success', decodedResponse);
+        </script>
+    }
+
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creación Denegada', 'error', decodedResponse);
+        </script>
+    }
+
+    TempData["responseCode"] = null;
+}

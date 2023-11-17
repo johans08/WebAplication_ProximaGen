@@ -37,7 +37,7 @@ namespace WebAplication_ProximaGen.Controllers
             }
             catch (Exception ex)
             {
-                return View("ErrorView"); 
+                return View("ErrorView");
             }
         }
 
@@ -64,12 +64,12 @@ namespace WebAplication_ProximaGen.Controllers
 
                 return estados;
             }
-            catch (Exception) 
+            catch (Exception)
             {
 
                 return null;
             }
-            
+
         }
 
         public ActionResult Permissions()
@@ -319,7 +319,7 @@ namespace WebAplication_ProximaGen.Controllers
             try
             {
                 var tarjetas = LeerTarjetas(0);//0,100
-                
+
                 TempData["Tarjetas"] = tarjetas;
                 return View();
             }
@@ -400,6 +400,30 @@ namespace WebAplication_ProximaGen.Controllers
         }
 
 
+        public ActionResult AsignarPermiso()
+        {
+            try
+            {
+
+                var permisos = LeerPermisos(0, 100);//0,100
+                var roles = LeerRoles(0, 100);//0,100
+                var permisosXRoles = LeerPermisosXRol(20);
+
+                TempData["listaPermisos"] = permisos;
+                TempData["listaRoles"] = roles;
+                TempData["permisosXRoles"] = permisosXRoles;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
         // POST: Maintenance/CreateStatus
         [HttpPost]
         public ActionResult CreateStatus(Status status)
@@ -429,9 +453,9 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Status");
             }
@@ -469,7 +493,7 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Status");
             }
@@ -506,9 +530,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Status");
             }
@@ -585,9 +609,9 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Permissions");
             }
@@ -626,7 +650,7 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Permissions");
             }
@@ -637,7 +661,7 @@ namespace WebAplication_ProximaGen.Controllers
         }
 
         // POST: Maintenance/CreateRoles
-        
+
         [HttpPost]
         public ActionResult CreateRoles(Roles roles)
         {
@@ -669,14 +693,14 @@ namespace WebAplication_ProximaGen.Controllers
 
                 return RedirectToAction("Roles");
 
-            }    
+            }
             catch
             {
 
                 return View();
             }
         }
-        
+
 
         [HttpPost]
         public ActionResult UpdateRoles(Roles roles)
@@ -705,9 +729,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Roles");
             }
@@ -745,9 +769,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Roles");
             }
@@ -757,7 +781,7 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
-        
+
         // POST: Maintenance/CreateGenero
         [HttpPost]
         public ActionResult CreateGenero(Generos generos)
@@ -792,7 +816,7 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Generos");
             }
@@ -830,9 +854,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Generos");
             }
@@ -868,9 +892,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Generos");
             }
@@ -908,9 +932,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Contactos");
             }
@@ -947,9 +971,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Contactos");
             }
@@ -967,7 +991,7 @@ namespace WebAplication_ProximaGen.Controllers
                 string response = ""; string responseCode = "";
                 if (contactos.idContacto != 0)
                 {
-                    
+
                     DataSet dsContactos = new DataSet();
 
                     dsContactos = wsClient.EliminarContactos(contactos.idContacto);
@@ -986,9 +1010,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Contactos");
             }
@@ -1027,7 +1051,7 @@ namespace WebAplication_ProximaGen.Controllers
                     responseCode = 0.ToString();
                 }
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("TipoContactos");
             }
@@ -1065,9 +1089,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("TipoContactos");
             }
@@ -1104,9 +1128,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("TipoContactos");
             }
@@ -1144,9 +1168,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Tarjetas");
             }
@@ -1183,9 +1207,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-               
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Tarjetas");
             }
@@ -1222,9 +1246,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Tarjetas");
             }
@@ -1263,9 +1287,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Person");
             }
@@ -1303,9 +1327,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Person");
             }
@@ -1344,9 +1368,9 @@ namespace WebAplication_ProximaGen.Controllers
                     response = "Modelo Invalido";
                     responseCode = 0.ToString();
                 }
-                
 
-                TempData["response"] = response;  TempData["responseCode"] = responseCode; 
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
 
                 return RedirectToAction("Person");
             }
@@ -1356,11 +1380,148 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult CreateAsignarPermiso(AsignarPermisos data)
+        {
+            try
+            {
+                string response = ""; string responseCode = "";
+
+                if (ModelState.IsValid)
+                {
+                    DataSet dsEstado = new DataSet();
+
+                    dsEstado = wsClient.AgregarPermisoXRol(data.idPermiso, data.idRol);
+
+                    foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
 
 
 
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
+
+                return RedirectToAction("AsignarPermiso");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
 
+
+        [HttpPost]
+        public ActionResult UpdateAsignarPermiso(AsignarPermisos status)
+        {
+            try
+            {
+                string response = ""; string responseCode = "";
+
+                if (ModelState.IsValid)
+                {
+                    DataSet dsEstado = new DataSet();
+
+                    dsEstado = wsClient.ModificarPermisoXRol(status.idPermiso, status.idRol);
+
+                    foreach (DataRow dr in dsEstado.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+
+
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
+
+                return RedirectToAction("AsignarPermiso");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public List<AsignarPermisos> LeerPermisosXRol(int rol)
+        {
+            try
+            {
+                DataSet dsPermisos = new DataSet();
+                dsPermisos = wsClient.LeerPermisosXRoles(rol);
+
+                // Convertir los datos a una lista de objetos Status
+                var permisosXRol = new List<AsignarPermisos>();
+                foreach (DataRow dr in dsPermisos.Tables[0].Rows)
+                {
+                    var permisoXRol = new AsignarPermisos
+                    {
+                        idPermiso = int.Parse(dr["Permisos_idPermiso"].ToString()),
+                        idRol = int.Parse(dr["Roles_idRol"].ToString()),
+                        permiso = dr["permiso"].ToString(),
+                        rol = dr["descripcionRol"].ToString()
+                    };
+                    permisosXRol.Add(permisoXRol);
+                }
+
+                // Puedes almacenar la lista de estados en TempData para que esté disponible en la vista
+
+                return permisosXRol;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public ActionResult LeerPermisosXRolQuery(AsignarPermisos rol)
+        {
+            try
+            {
+                DataSet dsPermisos = new DataSet();
+
+                int.TryParse(rol.idRol.ToString(), out int idRol);
+                dsPermisos = wsClient.LeerPermisosXRoles(idRol);
+
+                var permisos = LeerPermisos(0, 100);//0,100
+                var roles = LeerRoles(0, 100);//0,100
+                var permisosXRoles = LeerPermisosXRol(idRol);
+
+                TempData["listaPermisos"] = permisos;
+                TempData["listaRoles"] = roles;
+                TempData["permisosXRoles"] = permisosXRoles;
+
+                return View("AsignarPermiso");
+
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
+
+        }
 
     }
 }

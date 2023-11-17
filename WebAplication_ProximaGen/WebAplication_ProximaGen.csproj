@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Logica\Cifrados.cs" />
     <Compile Include="Logica\Constantes.cs" />
+    <Compile Include="Models\AsignarPermisos.cs" />
     <Compile Include="Models\Contactos.cs" />
     <Compile Include="Models\Generos.cs" />
     <Compile Include="Models\Permissions.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Maintenance\Contacto.cshtml" />
+    <Content Include="Views\Maintenance\AsignarPermiso.cshtml" />
     <None Include="Views\Maintenance\Generos.cshtml" />
     <Content Include="Views\Maintenance\TipoContactos.cshtml" />
     <Content Include="Views\Maintenance\Tarjetas.cshtml" />
