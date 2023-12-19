@@ -21,6 +21,10 @@ namespace WebAplication_ProximaGen.Controllers
         {
             return View();
         }
+        public ActionResult Logout()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult LoginUser(Usuarios user)

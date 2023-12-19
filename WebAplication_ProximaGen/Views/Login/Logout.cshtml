@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Logout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Session["idPersona"] = null;
+    Session["Cedula"] = null;
+    Session["Nombre"] = null;
+    Session["Apellido"] = null;
+    Session["Apellido2"] = null;
+    Session["FechaNacimiento"] = null;
+    Session["Usuario"] = null;
+    Session["Rol"] = null;
+    Session["idRol"] = null;
+    Response.Redirect("~/Login/Login");
+}
+

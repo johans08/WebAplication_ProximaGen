@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Title = "Tarjetas";
+}
+
+@using WebAplication_ProximaGen.Logica
+
+@model WebAplication_ProximaGen.Models.Tarjetas
+
+
+@{
+
+    List<SelectListItem> GetListaMeses()
+    {
+        List<SelectListItem> meses = new List<SelectListItem>
+{
+            new SelectListItem { Text = "Enero", Value = "1" },
+            new SelectListItem { Text = "Febrero", Value = "2" },
+            new SelectListItem { Text = "Marzo", Value = "3" },
+            new SelectListItem { Text = "Abril", Value = "4" },
+            new SelectListItem { Text = "Mayo", Value = "5" },
+            new SelectListItem { Text = "Junio", Value = "6" },
+            new SelectListItem { Text = "Julio", Value = "7" },
+            new SelectListItem { Text = "Agosto", Value = "8" },
+            new SelectListItem { Text = "Septiembre", Value = "9" },
+            new SelectListItem { Text = "Octubre", Value = "10" },
+            new SelectListItem { Text = "Noviembre", Value = "11" },
+            new SelectListItem { Text = "Diciembre", Value = "12" }
+        };
+        return meses;
+    }
+
+    List<SelectListItem> GetListaAnnos()
+    {
+        List<SelectListItem> meses = new List<SelectListItem>
+{
+        new SelectListItem { Text = "2023", Value = "2023" },
+        new SelectListItem { Text = "2024", Value = "2024" },
+        new SelectListItem { Text = "2025", Value = "2025" },
+        new SelectListItem { Text = "2026", Value = "2026" },
+        new SelectListItem { Text = "2027", Value = "2027" }
+    };
+        return meses;
+    }
+}
+
+<section class="pc-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Registros</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Registros</a></li>
+                            <li class="breadcrumb-item">Tarjetas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Registrar Tarjet</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-5">Información Tarjetas</h5>
+                        <hr>
+                        @using (Html.BeginForm("CreateTarjetasPersonal", "Maintenance", FormMethod.Post))
+                        {
+                            <form action="~/Maintenance/CreateTarjetas" method="post">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.numeroTarjeta, "Numero de tarjeta", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.numeroTarjeta, new { @class = "form-control", @type = "number", placeholder = "Numero de tarjeta", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.numeroTarjeta)
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.expiracionMes, "Mes en el que expira", new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.expiracionMes, GetListaMeses(), new { @class = "form-control", placeholder = "Mes en el que expira", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.expiracionMes)
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.expiracionAnno, "Año en el que expira", new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.expiracionAnno, GetListaAnnos(), new { @class = "form-control", placeholder = "Anno en el que expira", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.expiracionAnno)
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.cvv, "CVV", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.cvv, new { @class = "form-control", placeholder = "CVV", @type = "number", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.cvv)
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(model => model.Personas_idPersona, "Persona", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.Personas_idPersona, new { @class = "form-control", @type = "number", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Personas_idPersona)
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Agregar Tarjeta</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Reporte de Tarjeta</h5>
+                    <span class="d-block m-t-5">Este <code>reporte</code> muestra los datos de la tarjeta</span>
+                </div>
+                <div class="card-body table-border-style">
+                    @*<br>*@
+                    <div class="form-group">
+                        @*<br>*@
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table id="tableTarjeta" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Numero de la tarjeta</th>
+                                    <th>Mes expiración</th>
+                                    <th>Año expiración</th>
+                                    <th>CVV</th>
+                                    <th>Persona</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["Tarjetas"] != null)
+                                {
+                                    foreach (var tarjeta in TempData["Tarjetas"] as List<WebAplication_ProximaGen.Models.Tarjetas>)
+                                    {
+                                        <tr>
+                                            <td>@tarjeta.idTarjeta</td>
+                                            <td>@tarjeta.numeroTarjeta</td>
+                                            <td>@tarjeta.expiracionMes</td>
+                                            <td>@tarjeta.expiracionAnno</td>
+                                            <td>@tarjeta.cvv</td>
+                                            <td>@tarjeta.Personas_idPersona</td>
+                                            <td>@tarjeta.Estados_idEstado</td>
+
+                                            <td>
+                                                <a href="#" class="edit-icon" data-id="@tarjeta.idTarjeta" onclick="AbrirModal('@tarjeta.idTarjeta', '@tarjeta.numeroTarjeta','@tarjeta.expiracionMes','@tarjeta.expiracionAnno','@tarjeta.cvv','@tarjeta.Personas_idPersona','@tarjeta.Estados_idEstado');"><i class="fas fa-pen"></i></a>
+                                                <a href="#" class="delete-icon" data-id="@tarjeta.idTarjeta" onclick="EliminarDato(@tarjeta.idTarjeta);"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <!-- Agrega los botones de exportación aquí -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para editar datos -->
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Editar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("UpdateTarjetas", "Maintenance", FormMethod.Post))
+            {
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idTarjeta)
+                            @Html.TextBoxFor(model => model.idTarjeta, new { @class = "form-control", @readonly = "readonly", @id = "idGenero" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idTarjeta)
+                            @Html.TextBoxFor(model => model.idTarjeta, new { @class = "form-control", @id = "descripcionGeneroInput" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function AbrirModal(idGenero, genero) {
+        const idGeneroInput = document.getElementById("idGenero");
+        const descripcionGeneroInput = document.getElementById("descripcionGeneroInput");
+
+        idGeneroInput.value = idGenero;
+        descripcionGeneroInput.value = genero;
+
+        const editarModal = new bootstrap.Modal(document.getElementById("editarModal"));
+        editarModal.show();
+    }
+
+
+
+
+    function EliminarDato(id) {
+
+        var controller = "Maintenance";
+        var action = "DeleteTarjetas";
+        var successMessage = "Se eliminó la tarjeta con éxito";
+        var errorMessage = "No se ha eliminado, hubo un error de comunicación";
+        var dataString = "idTarjeta";
+
+        EliminarDatosAjax(id, controller, action, successMessage, errorMessage, dataString);
+    }
+
+</script>
+
+@if (TempData["responseCode"] != null)
+{
+    if (TempData["responseCode"] == null)
+    {
+        <script>
+            CreateAlert('Fallo del sistema', 'error', 'No ha devuelto una respuesta, comuniquese con IT');
+        </script>
+    }
+
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[0].ToString()))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creación Exitosa', 'success', decodedResponse);
+        </script>
+    }
+
+    if (TempData["responseCode"].ToString().Contains(Constantes.responsesCode[1].ToString()))
+    {
+        <script>
+            var decodedResponse = @Html.Raw(Json.Encode(TempData["response"]));
+            CreateAlert('Creación Denegada', 'error', decodedResponse);
+        </script>
+    }
+
+    TempData["responseCode"] = null;
+}

@@ -332,6 +332,29 @@ namespace WebAplication_ProximaGen.Controllers
             }
         }
 
+        public ActionResult TarjetasPersonal()
+        {
+            try
+            {
+                int idPersona = 0;
+                int.TryParse(Session["idPersona"].ToString(), out idPersona);
+                var tarjetas = LeerTarjetas(idPersona);//0,100
+
+                TempData["Tarjetas"] = tarjetas;
+
+                var model = new Tarjetas();
+                model.Personas_idPersona = idPersona;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores (puedes registrar el error o redirigir a una página de error)
+                // Por ejemplo, puedes registrar el error en un archivo de registro:
+                // Log.Error(ex);
+                return View("ErrorView"); // Puedes crear una vista de error personalizada
+            }
+        }
+
         public List<Tarjetas> LeerTarjetas(int idPersona)
         {
 
@@ -352,8 +375,8 @@ namespace WebAplication_ProximaGen.Controllers
                         expiracionMes = int.Parse(dr["expiracionMes"].ToString()),
                         expiracionAnno = int.Parse(dr["expiracionAnno"].ToString()),
                         cvv = dr["cvv"].ToString(),
-                        Personas_idPersona = int.Parse(dr["Personas_idPersona"].ToString()),
-                        Estados_idEstado = int.Parse(dr["Estados_idEstado"].ToString())
+                        Personas_idPersona = int.Parse(dr["idPersona"].ToString()),
+                        Estados_idEstado = int.Parse(dr["idEstado"].ToString())
                     };
                     tarjetas.Add(tarjeta);
                 }
@@ -1181,6 +1204,46 @@ namespace WebAplication_ProximaGen.Controllers
         }
 
         [HttpPost]
+        public ActionResult CreateTarjetasPersonal(Tarjetas tarjetas)
+        {
+            try
+            {
+                string response = ""; string responseCode = "";
+                tarjetas.Estados_idEstado = 1;
+
+                if (ModelState.IsValid)
+                {
+                    DataSet dsTarjetas = new DataSet();
+
+                    dsTarjetas = wsClient.AgregarTarjetas(tarjetas.numeroTarjeta, tarjetas.expiracionMes, tarjetas.expiracionAnno, tarjetas.cvv, tarjetas.Personas_idPersona, tarjetas.Estados_idEstado);
+
+                    foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
+                    {
+                        response = dr["response"].ToString();
+                        responseCode = dr["OperacionExitosa"].ToString();
+                    }
+
+                    // Codificar el mensaje para JavaScript
+                    response = HttpUtility.JavaScriptStringEncode(response);
+                }
+                else
+                {
+                    response = "Modelo Invalido";
+                    responseCode = 0.ToString();
+                }
+
+
+                TempData["response"] = response; TempData["responseCode"] = responseCode;
+
+                return RedirectToAction("TarjetasPersonal");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
         public ActionResult UpdateTarjetas(Tarjetas tarjetas)
         {
             try
@@ -1220,17 +1283,17 @@ namespace WebAplication_ProximaGen.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteTarjetas(Tarjetas tarjetas)
+        public ActionResult DeleteTarjetas(int idTarjeta)
         {
             try
             {
                 string response = ""; string responseCode = "";
 
-                if (tarjetas.idTarjeta != 0)
+                if (idTarjeta != 0)
                 {
                     DataSet dsTarjetas = new DataSet();
 
-                    dsTarjetas = wsClient.EliminarTarjetas(tarjetas.idTarjeta);
+                    dsTarjetas = wsClient.EliminarTarjetas(idTarjeta);
 
                     foreach (DataRow dr in dsTarjetas.Tables[0].Rows)
                     {
