@@ -8,10 +8,10 @@ namespace WebAplication_ProximaGen.Models
 {
     public class Permissions
     {
-        [Required]
+        [Required(ErrorMessage = "El id es obligatorio")]
         public int idPermiso { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La descripción de permiso es obligatorio")]
         public string permiso { get; set; }
     }
 }

@@ -5,7 +5,7 @@
 
 @using WebAplication_ProximaGen.Logica
 
-@model WebAplication_ProximaGen.Models.Personas
+@model WebAplication_ProximaGen.Models.PersonaUsuario
 
 
 <section class="pc-container">
@@ -41,40 +41,40 @@
                                 <!--Llamo a la funcion-->
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.cedula, "Cédula", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.cedula, new { @class = "form-control", placeholder = "Cédula", @id = "cedulaInput" })
+                                        @Html.LabelFor(model => model.persona.cedula, "Cédula", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.persona.cedula, new { @class = "form-control", placeholder = "Cédula", @id = "cedulaInput" })
 
                                         @*<label class="form-label" for="inputEmail4">Cedula</label>
                                             <input type="number" class="form-control" id="inputEmail4" placeholder="Cedula">*@
                                     </div>
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.nombre, "Nombre", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", placeholder = "Nombre", @id = "nombreInput" })
+                                        @Html.LabelFor(model => model.persona.nombre, "Nombre", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.persona.nombre, new { @class = "form-control", placeholder = "Nombre", @id = "nombreInput" })
 
                                         @*<label class="form-label" for="inputEmail4">Nombre</label>
                                             <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">*@
                                     </div>
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.apellido, "Primer Apellido", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.apellido, new { @class = "form-control", placeholder = "Primer Apellido", @id = "apellidoInput" })
+                                        @Html.LabelFor(model => model.persona.apellido, "Primer Apellido", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.persona.apellido, new { @class = "form-control", placeholder = "Primer Apellido", @id = "apellidoInput" })
                                         @*<label class="form-label" for="inputPassword4">Apellido</label>
                                         <input type="password" class="form-control" id="inputPassword4" placeholder="Apellido">*@
                                     </div>
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.apellido2, "Segundo Apellido", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.apellido2, new { @class = "form-control", placeholder = "Segundo Apellido", @id = "apellido2Input" })
+                                        @Html.LabelFor(model => model.persona.apellido2, "Segundo Apellido", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.persona.apellido2, new { @class = "form-control", placeholder = "Segundo Apellido", @id = "apellido2Input" })
                                         @*<label class="form-label" for="inputPassword4">Segundo Apellido</label>
                                         <input type="password" class="form-control" id="inputPassword4" placeholder="Segundo Apellido">*@
                                     </div>
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.fechaNacimiento, "Fecha nacimiento", new { @class = "form-label" })
-                                        @Html.TextBoxFor(model => model.fechaNacimiento, new { @class = "form-control", placeholder = "Fecha nacimiento", @id = "fechaNacimientoInput", @type= "date" })
+                                        @Html.LabelFor(model => model.persona.fechaNacimiento, "Fecha nacimiento", new { @class = "form-label" })
+                                        @Html.TextBoxFor(model => model.persona.fechaNacimiento, new { @class = "form-control", placeholder = "Fecha nacimiento", @id = "fechaNacimientoInput", @type= "date" })
                                         @*<label class="form-label" for="inputAddress">Fecha de Nacimiento</label>
                                         <input type="date" class="form-control" id="inputAddress" placeholder="Fecha de nacimiento">*@
                                     </div>
                                     <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.Generos_idGenero, "Género", new { @class = "form-label" })
-                                        @Html.DropDownListFor(model => model.Generos_idGenero, new List<SelectListItem>
+                                        @Html.LabelFor(model => model.persona.Generos_idGenero, "Género", new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.persona.Generos_idGenero, new List<SelectListItem>
                                         {
                                             new SelectListItem { Text = "Masculino", Value = "Masculino" },
                                             new SelectListItem { Text = "Femenino", Value = "Femenino" }
@@ -82,8 +82,16 @@
 
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="form-label" for="inputAddress">Direccion</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="Direccion">
+                                        @Html.LabelFor(model => model.contacto.TipoContactos_idTipoContacto, "Tipo contacto", new { @class = "form-label" })
+                                        @if (TempData["listaTipoContacto"] != null)
+                                        {
+                                            <select name="TipoContactos_idTipoContacto" id="TipoContactos_idTipoContacto" class="form-control">
+                                                @foreach (var persona in TempData["listaTipoContacto"] as List<WebAplication_ProximaGen.Models.Contactos>)
+                                                {
+                                                    <option class="form-control" value="@persona.TipoContactos_idTipoContacto">@persona.descripcionContacto</option>
+                                                }
+                                            </select>
+                                        }
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="form-label" for="inputPassword4">Numero</label>

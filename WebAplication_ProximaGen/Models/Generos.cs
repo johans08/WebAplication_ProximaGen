@@ -8,10 +8,10 @@ namespace WebAplication_ProximaGen.Models
 {
     public class Generos
     {
-        [Required(ErrorMessage = "El id Estado es obligatorio")]
+        [Required(ErrorMessage = "El id género es obligatorio")]
         public int idGenero { get; set; }
 
-        [Required(ErrorMessage = "La descripcion del estado es obligatoria")]
+        [Required(ErrorMessage = "La descripción del género es obligatoria")]
         public string genero { get; set; }
     }
 }

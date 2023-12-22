@@ -12,7 +12,7 @@ namespace WebAplication_ProximaGen.Models
         public int idEstado { get; set; }
 
         [StringLength(45)]
-        [Required(ErrorMessage = "La descripcion es obligatoria")]
+        [Required(ErrorMessage = "La descripción es obligatoria")]
         public string descripcionEstado { get; set; }
     }
 }

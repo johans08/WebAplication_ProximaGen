@@ -18,6 +18,22 @@ namespace WebAplication_ProximaGen.Controllers
         {
             try
             {
+                DataSet dataSet = new DataSet();
+
+                List<Contactos> listacontactos = new List<Contactos>();
+                dataSet = wsClient.LeerTipoContactos(0,100);
+                foreach (DataRow dr in dataSet.Tables[0].Rows)
+                {
+                    var Contactos = new Contactos
+                    {
+                        TipoContactos_idTipoContacto = int.Parse(dr["idTipoContacto"].ToString()),
+                        descripcionContacto = dr["descripcionTipoContacto"].ToString()
+                    };
+                    listacontactos.Add(Contactos);
+                }
+
+                TempData["listaTipoContacto"] = listacontactos;
+
                 return View();
             }
             catch (Exception)
@@ -1323,7 +1339,7 @@ namespace WebAplication_ProximaGen.Controllers
 
 
         //---------------------------------------------------------
-        public ActionResult CreatePerson(Personas persona, Usuarios usuarios, Contactos contactos, Roles rol)
+        public ActionResult CreatePerson(PersonaUsuario persona)
         {
             try
             {
@@ -1333,8 +1349,8 @@ namespace WebAplication_ProximaGen.Controllers
                 {
                     DataSet dsPersonas = new DataSet();
 
-                    dsPersonas = wsClient.AgregarPersona_Usuario_Contacto(persona.cedula, persona.nombre, persona.apellido, persona.apellido2, persona.fechaNacimiento, persona.Generos_idGenero, persona.Estados_idEstado,
-                        contactos.descripcionContacto, contactos.TipoContactos_idTipoContacto, usuarios.nombreUsuarios, usuarios.contrasenna, usuarios.correo, rol.idRol);
+                    dsPersonas = wsClient.AgregarPersona_Usuario_Contacto(persona.persona.cedula, persona.persona.nombre, persona.persona.apellido, persona.persona.apellido2, persona.persona.fechaNacimiento, persona.persona.Generos_idGenero, persona.persona.Estados_idEstado,
+                        persona.contacto.descripcionContacto, persona.contacto.TipoContactos_idTipoContacto, persona.usuario.nombreUsuarios, persona.usuario.contrasenna, persona.usuario.correo, persona.rol.idRol);
 
                     foreach (DataRow dr in dsPersonas.Tables[0].Rows)
                     {

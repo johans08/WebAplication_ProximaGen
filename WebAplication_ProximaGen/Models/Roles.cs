@@ -8,10 +8,10 @@ namespace WebAplication_ProximaGen.Models
 {
     public class Roles
     {
-        [Required]
+        [Required(ErrorMessage = "El id rol es obligatorio")]
         public int idRol { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La descripción del rol es obligatorio")]
         public string descripcionRol { get; set; }
     }
 }

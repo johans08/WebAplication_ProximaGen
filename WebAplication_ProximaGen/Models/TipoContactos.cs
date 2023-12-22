@@ -8,10 +8,10 @@ namespace WebAplication_ProximaGen.Models
 {
     public class TipoContactos
     {
-        [Required(ErrorMessage = "El id es obligatorio")]
+        [Required(ErrorMessage = "El id tipo contacto es obligatorio")]
         public int idTipoContacto { get; set; }
 
-        [Required(ErrorMessage = "La descripcion es obligatoria")]
+        [Required(ErrorMessage = "La descripción es obligatoria")]
         public string descripcionTipoContacto { get; set; }
 
     }
